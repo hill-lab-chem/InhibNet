@@ -2,6 +2,28 @@
 
 Welcome! This app allows you to explore how **competitive inhibition** affects the mechanical properties of polymer networks.
 
+## Quick Start
+
+If you are super impatient here is the quick start for using this app:
+
+Clone this repo and run the app:
+
+```bash
+git clone https://github.com/hill-lab-chem/InhibNet.git
+cd InhibNet
+
+# Create & activate virtual environment
+python -m venv venv
+source venv/bin/activate       # macOS / Linux
+venv\Scripts\Activate.ps1      # Windows PowerShell
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Launch app
+streamlit run InhibNet.py
+```
+## Background on work
 The purpose of this work is to quantify how a single polymer network can be altered by adding a small molecule that can compete with a crosslink.  
 We hypothesized that principles from competitive inhibition of enzymes could be adapted to dynamic hydrogels to provide a simple framework for predicting how key network properties change in the presence of competing species.  
 
@@ -106,7 +128,36 @@ $$
 
 ## Instructions
 
-- Use the **sidebar** to select a page.  
-- Adjust model parameters for each app.  
-- Hover over 3D plots to see modulus values at each point (App 1).  
-- Switch between Phantom and Affine network calculations using the model selector.
+### 1) Install Python
+- Install **Python 3.9+** from https://www.python.org/downloads/  
+- On Windows, check **“Add Python to PATH”** during installation.
+### 2) Create & Activate a Virtual Environment
+```bash
+# Navigate to the folder containing your .py file
+cd /path/to/your/project
+
+# Create a virtual environment named "venv"
+python -m venv venv
+
+# Windows (PowerShell)
+venv\Scripts\Activate.ps1
+
+# Windows (cmd)
+venv\Scripts\activate.bat
+
+# macOS / Linux
+source venv/bin/activate
+```
+### 3) Install Dependencies
+```
+# Optional but recommended
+python -m pip install --upgrade pip
+
+# use the requirements file in
+pip install -r requirements.txt
+
+# Or install packages directly:
+pip install streamlit numpy matplotlib scipy plotly pandas scikit-learn
+```
+
+
