@@ -13,9 +13,9 @@ git clone https://github.com/hill-lab-chem/InhibNet.git
 cd InhibNet
 
 # Create & activate virtual environment
-python -m venv venv
-source venv/bin/activate       # macOS / Linux
-venv\Scripts\Activate.ps1      # Windows PowerShell
+python -m venv InhibNetEnv
+source InhibNetEnv/bin/activate       # macOS / Linux
+InhibNetEnv\Scripts\Activate.ps1      # Windows PowerShell
 
 # Install dependencies
 pip install -r requirements.txt
