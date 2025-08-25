@@ -88,7 +88,7 @@ def description_page():
     for you to see what modulus values a range of comeptitor strengths and concentrations will yield.
     2. **Modulus vs Competitor Concentration** – 2D plot to see how modulus changes with a single competitor. Input features of the crosslink, and the competitor, and the initial stiffness of your gel.
     The output will be a prediction of how modulus will change under a range of competitor concentrations. Feel free to download a CSV of your data.
-    3. **Modulus vs $K_{a,C}$** – A tool to predict either $K_{a,C}$ or $K_{a,XL}$ from experimental modulus and concentration data. 
+    3. **Experimental Modulus and Concentration to predict $K_{a,C}$ or $K_{a,XL}$** – A tool to predict either $K_{a,C}$ or $K_{a,XL}$ from experimental modulus and concentration data. 
     
     ### Network Models
     You can choose between two network models:
