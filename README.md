@@ -22,53 +22,66 @@ We designed a quantitative model that inputs $K_{a,app}$ into **crosslink conver
 
 ---
 
-## Equations
+# Equations
 
-### 1. Crosslink Conversion
-\[
+## 1. Crosslink Conversion
+
+The crosslink conversion is calculated as:
+
+$$
 p = \left(1 + \frac{1}{2 N_a K_{a,app}}\right) - \sqrt{\left(1 + \frac{1}{2 N_a K_{a,app}}\right)^2 - 1}
-\]
+$$
 
-### 2. Shear Modulus (Affine Network)
+## 2. Shear Modulus (Affine Network)
 
-Effective probability term:
-\[
+First, define the effective probability term:
+
+$$
 P_{out} = \sqrt{\frac{1}{p} - \frac{3}{4}} - \frac{1}{2}
-\]
+$$
 
-Probability 3 crosslinks form:
-\[
-P_3 = 4 \, P_{out} (1 - P_{out})^3
-\]
+The probability that 3 crosslinks will form:
 
-Probability 4 crosslinks form:
-\[
-P_4 = (1 - P_{out})^4
-\]
+$$
+P_{3} = 4 P_{out} (1-P_{out})^3
+$$
 
-Elastically active strands:
-\[
-v_e = \frac{N_a}{4} \left(\frac{3}{2} P_3 + 2 P_4 \right)
-\]
+The probability that 4 crosslinks will form:
 
-Modulus:
-\[
-\frac{g_0}{K_b T} = v_e
-\]
+$$
+P_{4} = (1-P_{out})^4
+$$
 
-### 3. Shear Modulus (Phantom Network)
+The elastically active strands are:
 
-The phantom network corrects for concentration of crosslinks:
-\[
-\frac{g_0}{K_b T} = v_e - \mu
-\]
+$$
+v_{e} = \frac{N_a}{4} \left(\frac{3}{2} P_3 + 2 P_4 \right)
+$$
 
-Simplified modulus equation:
-\[
+The modulus is then:
+
+$$
+\frac{g_0}{K_b T} = v_{e}
+$$
+
+## 3. Shear Modulus (Phantom Network)
+
+The phantom network corrects for the concentration of crosslinks:
+
+$$
+\frac{g_0}{K_b T} = v_{e} - \mu
+$$
+
+where $\mu$ is the concentration of crosslinks.
+
+This equation can be simplified as:
+
+$$
 g_0 = \frac{N_a}{16} \left(3 - \sqrt{\frac{4}{p} - 3}\right)^3 \left(\sqrt{\frac{4}{p} - 3} + 1\right)
-\]
+$$
 
 ---
+
 
 ## Main Tools
 
