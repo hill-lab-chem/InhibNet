@@ -21,7 +21,7 @@ InhibNetEnv\Scripts\Activate.ps1      # Windows PowerShell
 pip install -r requirements.txt
 
 # Launch app
-streamlit run InhibNet.py
+streamlit run INHIBNET_App.py
 ```
 ## Background on work
 The purpose of this work is to quantify how a single polymer network can be altered by adding a small molecule that can compete with a crosslink.  
