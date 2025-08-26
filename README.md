@@ -159,5 +159,7 @@ pip install -r requirements.txt
 # Or install packages directly:
 pip install streamlit numpy matplotlib scipy plotly pandas scikit-learn
 ```
-
+### 4) Run the app
+'''
+streamlit run INHIBNET_App.py
 
