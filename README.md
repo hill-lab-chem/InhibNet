@@ -137,17 +137,17 @@ $$
 # Navigate to the folder containing your .py file
 cd /path/to/your/project
 
-# Create a virtual environment named "venv"
-python -m venv venv
+# Create a virtual environment named "InhibNetEnv"
+python -m venv InhibNetEnv
 
 # Windows (PowerShell)
-venv\Scripts\Activate.ps1
+InhibNetEnv\Scripts\Activate.ps1
 
 # Windows (cmd)
-venv\Scripts\activate.bat
+InhibNetEnv\Scripts\activate.bat
 
 # macOS / Linux
-source venv/bin/activate
+source InhibNetEnv/bin/activate 
 ```
 ### 3) Install Dependencies
 ```
