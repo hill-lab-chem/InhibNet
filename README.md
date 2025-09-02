@@ -134,7 +134,7 @@ $$
 - On Windows, check **“Add Python to PATH”** during installation.
 ### 2) Create & Activate a Virtual Environment
 ```bash
-# Navigate to the folder containing your .py file
+# Navigate to the folder containing InhibNet (this repo can be downloaded from the green code button -> download zip -> then you can expand the zip file)
 cd /path/to/your/project
 
 # Create a virtual environment named "InhibNetEnv"
