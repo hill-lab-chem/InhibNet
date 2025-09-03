@@ -134,25 +134,26 @@ $$
 - On Windows, check **“Add Python to PATH”** during installation.
 ### 2) Download this repository and navigate to the path
 - This repo can be downloaded from the green code button
-- - Download zip
-- - Then you can expand the zip file
-- This can be done through Terminal, command line, etc.
-- Navigate to the folder containing InhibNet
--
-- 
+   - Download zip
+   - Then you can expand the zip file
+   - It should be labeled as a folder "InhibNet-Main"
+- Now we need to navigate to the folder "InhibNet-Main"
+   - This can be done through Terminal, command line, etc.
+- Navigate to the folder containing InhibNet:
+
 ```bash
 cd /path/to/InhibNet-main
 #note that this won't be your exact path, find where you saved the Inhib-Net folder in file explorer, or finder and you can copy the file path
 ```
 
-# Create a virtual environment named "InhibNetEnv"
+### 3) Create a virtual environment named "InhibNetEnv"
 - you can call this environment whatever you want here I call it InhibNetEnv
 - note: some people may need to write "py" instead of python because of how your computer saved python
 ```bash
 python -m venv InhibNetEnv
 ```
 
-### 3) Activate your environment
+### 4) Activate your environment
 
 - Windows (PowerShell)
 ```bash
@@ -166,19 +167,21 @@ InhibNetEnv\Scripts\activate.bat
 ```bash
 source InhibNetEnv/bin/activate 
 ```
-- After activating your environment instead of something like (base) you will see (InhibNetEnv
-### 4) Install Dependencies
+- After activating your environment instead of something like (base) you will see (InhibNetEnv) at the start of each line of code
+### 5) Install Dependencies
 ```
-# Make 
+# Make sure your pip is up to date
 python -m pip install --upgrade pip
-
-# use the requirements file in
-pip install -r requirements.txt
-
-# Or install packages directly:
-pip install streamlit numpy matplotlib scipy plotly pandas scikit-learn
 ```
-### 4) Run the app
+```
+# use the requirements file in the repository to make sure you have the required packages to run the app
+pip install -r requirements.txt
+```
+### 6) Run the app
 ```
 streamlit run INHIBNET_App.py
 ```
+### 7) Running the app locally in the future
+- Now that you have all the requirements ready, you can run the app with much fewer steps
+- You simply need to activate your enviroment (step 4)
+- Then run the app (step 6)
