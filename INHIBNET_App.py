@@ -73,7 +73,7 @@ def description_page():
     $$
     \frac{g_0}{K_b T} = v_{e} - \mu_{e}
     $$
-    where $\mu_{e}$ is \frac{N_a}{4} (P_3+P_4 )   
+    where $$\mu_{e}$ is \frac{N_a}{4} (P_3+P_4 )   $$
     
     Where the modulus equation can be simpliefied as:
     $$
