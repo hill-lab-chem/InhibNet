@@ -133,20 +133,33 @@ $$
 - Install **Python 3.9+** from https://www.python.org/downloads/  
 - On Windows, check **“Add Python to PATH”** during installation.
 ### 2) Create & Activate a Virtual Environment
+- This can be done through Terminal, command line, etc.
+- Navigate to the folder containing InhibNet
+- (this repo can be downloaded from the green code button -> download zip -> then you can expand the zip file)
 ```bash
-# Navigate to the folder containing InhibNet (this repo can be downloaded from the green code button -> download zip -> then you can expand the zip file)
-cd /path/to/your/project
+cd /path/to/InhibNet-main
+#note that this won't be your exact path, find where you saved the Inhib-Net folder in file explorer, or finder and you can copy the file path
+```
 
 # Create a virtual environment named "InhibNetEnv"
+- you can call this environment whatever you want here I call it InhibNetEnv
+- note: some people may need to write "py" instead of python because of how your computer saved python
+```bash
 python -m venv InhibNetEnv
+```
 
-# Windows (PowerShell)
+# Activate your environment
+
+- Windows (PowerShell)
+```bash
 InhibNetEnv\Scripts\Activate.ps1
-
-# Windows (cmd)
+```
+- Windows (cmd)
+```bash
 InhibNetEnv\Scripts\activate.bat
-
-# macOS / Linux
+```
+- macOS / Linux
+```bash
 source InhibNetEnv/bin/activate 
 ```
 ### 3) Install Dependencies
