@@ -15,7 +15,7 @@ def description_page():
     ### Welcome!
     This app allows you to explore how **competitive inhibition** affects mechanical properties of polymer networks.
 
-    For more information about this tool feel free to read our associated publication here: TBD Please keep your eyes peeled for updates!
+    For more information about this tool feel free to read our associated publication here: **TBD Please keep your eyes peeled for updates!**
 
     Or for information about how the code works feel free to visit our GitHub here: https://github.com/hill-lab-chem/InhibNet/
 
@@ -279,19 +279,32 @@ def app1(): #this is for making the 3d plot
     comp_min = st.sidebar.number_input("Competitor conc min (mM)", min_value=0.0, value=0.0)
     comp_max = st.sidebar.number_input("Competitor conc max (mM)", min_value=0.0, value=100.0)
 
-    st.sidebar.markdown("### Target Modulus Highlight")
-    target_modulus = st.sidebar.number_input("Target Modulus (kPa)", min_value=0.0, value=7.0)
-    tolerance = st.sidebar.number_input("Tolerance (±)", min_value=0.01, max_value=5.0, value=0.1)
-
-    comp_concs, kac_vals, modulus, CCOMP, KAC = compute_modulus_surface(
-        conc_cross, Kab, (kac_min, kac_max), (comp_min, comp_max), g0_init_user, model_choice
+    # Add a highlight mode selector
+    highlight_mode = st.sidebar.radio(
+        "Highlight By:",
+        ["Modulus", "Kac"]
     )
-
-    mask = np.abs(modulus - target_modulus) <= tolerance
-    highlight_x = CCOMP[mask]
-    highlight_y = KAC[mask]
-    highlight_z = modulus[mask]
-
+    
+    if highlight_mode == "Modulus":
+        target_modulus = st.sidebar.number_input("Target Modulus (kPa)", min_value=0.0, value=7.0)
+        tolerance = st.sidebar.number_input("Tolerance (±)", min_value=0.01, max_value=5.0, value=0.1)
+    
+        mask = np.abs(modulus - target_modulus) <= tolerance
+        highlight_x = CCOMP[mask]
+        highlight_y = KAC[mask]
+        highlight_z = modulus[mask]
+        highlight_name = f'Modulus ≈ {target_modulus}±{tolerance}'
+    
+    elif highlight_mode == "Kac":
+        target_kac = st.sidebar.number_input("Target $K_{a,C}$", min_value=0.0, value=1000.0)
+        tolerance = st.sidebar.number_input("Tolerance (±)", min_value=0.01, max_value=500.0, value=50.0)
+    
+        mask = np.abs(KAC - target_kac) <= tolerance
+        highlight_x = CCOMP[mask]
+        highlight_y = KAC[mask]
+        highlight_z = modulus[mask]
+        highlight_name = f'Ka,C ≈ {target_kac}±{tolerance}'
+    
     fig = go.Figure(data=[
         go.Surface(
             z=modulus,
@@ -307,7 +320,7 @@ def app1(): #this is for making the 3d plot
             z=highlight_z,
             mode='markers',
             marker=dict(size=4, color='red'),
-            name=f'Modulus ≈ {target_modulus}±{tolerance}',
+            name=highlight_name,
         )
     ])
 
