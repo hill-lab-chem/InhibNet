@@ -15,6 +15,10 @@ def description_page():
     ### Welcome!
     This app allows you to explore how **competitive inhibition** affects mechanical properties of polymer networks.
 
+    For more information about this tool feel free to read our associated publication here: TBD Please keep your eyes peeled for updates!
+
+    Or for information about how the code works feel free to visit our GitHub here: https://github.com/hill-lab-chem/InhibNet/
+
     The purpose of this work is to quantify how a single polymer network can be altered by adding a small molecule that can compete with a crosslink.
     We hypothesized that principles from competitive inhibition of enzymes could be adapted to dynamic hydrogels to provide a similarly simple framework for predicting how key network
     properties change in the presence of competing species. In particular, we reasoned that the apparent equilibrium ($K_{a,app}$), widely used in enzyme kinetics to capture effective affinities
