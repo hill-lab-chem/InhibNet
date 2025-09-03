@@ -311,7 +311,7 @@ def app1():
         highlight_y = KAC[mask]
         highlight_z = modulus[mask]
         highlight_name = f'Ka,C ≈ {target_kac}±{tolerance}'
-        highlight_color = "green"
+        highlight_color = "red"
 
     # Build figure
     fig = go.Figure(data=[
