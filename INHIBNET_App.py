@@ -264,52 +264,61 @@ def loss(K_val, conc_cross, other_K, init_g, comp_concs, exp_moduli, fit_target,
 # ==========================================================
 # App 1: 3D Competitive Inhibition Modulus Prediction Tool
 # ==========================================================
-def app1(): #this is for making the 3d plot
+def app1():
     st.title("3D Competitive Inhibition Modulus Prediction Tool")
 
+    # Sidebar model parameters
     st.sidebar.header("Model Parameters")
-    Kab = st.sidebar.number_input("$K_{a,XL}$ (Keq of crosslink)", min_value=0.0, value=2185.0) #default based on boronate ester crosslink from publicaition
+    Kab = st.sidebar.number_input("$K_{a,XL}$ (Keq of crosslink)", min_value=0.0, value=2185.0)
     conc_cross = st.sidebar.number_input("Crosslink Concentration (mM)", min_value=0.0, value=80.0)
     g0_init_user = st.sidebar.number_input("Initial Modulus (kPa)", min_value=0.0, value=20.0)
     model_choice = st.radio("Choose Network Model:", ["Phantom", "Affine"])
 
+    # Competitor parameter ranges
     st.sidebar.markdown("### Competitor Parameters")
     kac_min = st.sidebar.number_input("$K_{a,C}$ min", min_value=0.0, value=0.0)
     kac_max = st.sidebar.number_input("$K_{a,C}$ max", min_value=0.0, value=2000.0)
     comp_min = st.sidebar.number_input("Competitor conc min (mM)", min_value=0.0, value=0.0)
     comp_max = st.sidebar.number_input("Competitor conc max (mM)", min_value=0.0, value=100.0)
 
-    # Add a highlight mode selector
-    highlight_mode = st.sidebar.radio(
-        "Highlight By:",
-        ["Modulus", "Kac"]
+    # Highlight options
+    st.sidebar.markdown("### Highlight Options")
+    highlight_mode = st.sidebar.radio("Highlight By:", ["Modulus", "Kac"])
+
+    # Compute surface
+    comp_concs, kac_vals, modulus, CCOMP, KAC = compute_modulus_surface(
+        conc_cross, Kab, (kac_min, kac_max), (comp_min, comp_max), g0_init_user, model_choice
     )
-    
+
+    # Apply highlighting logic
     if highlight_mode == "Modulus":
         target_modulus = st.sidebar.number_input("Target Modulus (kPa)", min_value=0.0, value=7.0)
         tolerance = st.sidebar.number_input("Tolerance (±)", min_value=0.01, max_value=5.0, value=0.1)
-    
+
         mask = np.abs(modulus - target_modulus) <= tolerance
         highlight_x = CCOMP[mask]
         highlight_y = KAC[mask]
         highlight_z = modulus[mask]
         highlight_name = f'Modulus ≈ {target_modulus}±{tolerance}'
-    
-    elif highlight_mode == "Kac":
+        highlight_color = "red"
+
+    else:  # Highlight by KaC
         target_kac = st.sidebar.number_input("Target $K_{a,C}$", min_value=0.0, value=1000.0)
         tolerance = st.sidebar.number_input("Tolerance (±)", min_value=0.01, max_value=500.0, value=50.0)
-    
+
         mask = np.abs(KAC - target_kac) <= tolerance
         highlight_x = CCOMP[mask]
         highlight_y = KAC[mask]
         highlight_z = modulus[mask]
         highlight_name = f'Ka,C ≈ {target_kac}±{tolerance}'
-    
+        highlight_color = "green"
+
+    # Build figure
     fig = go.Figure(data=[
         go.Surface(
             z=modulus,
-            x=comp_concs,
-            y=kac_vals,
+            x=CCOMP,
+            y=KAC,
             colorscale='Blues',
             colorbar=dict(title='Modulus (kPa)'),
             hovertemplate="Conc: %{x:.2f} mM<br>Kac: %{y:.2f} M^-1<br>Modulus: %{z:.2f} kPa<extra></extra>"
@@ -319,7 +328,7 @@ def app1(): #this is for making the 3d plot
             y=highlight_y,
             z=highlight_z,
             mode='markers',
-            marker=dict(size=4, color='red'),
+            marker=dict(size=4, color=highlight_color),
             name=highlight_name,
         )
     ])
