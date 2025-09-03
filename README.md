@@ -134,8 +134,8 @@ $$
 - On Windows, check **“Add Python to PATH”** during installation.
 ### 2) Download this repository and navigate to the path
 - This repo can be downloaded from the green code button
--    Download zip
--       Then you can expand the zip file
+- - Download zip
+- - Then you can expand the zip file
 - This can be done through Terminal, command line, etc.
 - Navigate to the folder containing InhibNet
 -
