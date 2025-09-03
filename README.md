@@ -5,7 +5,7 @@ Associated publication: TBD
 
 ## Quick Start
 
-If you are super impatient here is the quick start for using this app:
+If you are super impatient here is the quick start for using this app.
 
 Clone this repo and run the app:
 
