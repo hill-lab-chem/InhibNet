@@ -546,7 +546,7 @@ elif page == "3D Surface Explorer":
     app1()
 elif page == "Modulus Prediction":
     app2()
-elif: page == "Keq Prediction":
+elif page == "Keq Prediction":
     app3()
 else:
     app4()
