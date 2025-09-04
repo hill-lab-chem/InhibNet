@@ -269,7 +269,7 @@ def fit_and_plot_physical(conc, tau, conc_cross, KabMax, KacMin):
     def model(c, tau_min):
         return tau_model_physical(c, tau_0_fixed, tau_min, conc_cross, KabMax, KacMin)
 
-    popt, _ = curve_fit(model, conc, tau, p0=[0.1], bounds=([0.001], [10.0]))
+    popt, _ = curve_fit(model, conc, tau, p0=[0.1], bounds=([0.0001], [100.0]))
 
     # Predictions
     c_pred = np.linspace(0, conc.max(), 300)
