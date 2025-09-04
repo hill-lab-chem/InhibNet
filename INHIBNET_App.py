@@ -514,7 +514,7 @@ def app4():
     comp_concs_str = st.text_input("Competitor concs (mM, comma-separated)", "0,10,20,30,40")
     exp_tau_str = st.text_input("Observed τ values (s, comma-separated)", 
                                 "4.56,3.86,3.47,3.20,2.87")
-
+    
     # --- Parse data ---
     try:
         conc = np.array([float(x) for x in comp_concs_str.split(",")]) / 1000  # mM → M
@@ -522,7 +522,8 @@ def app4():
     except Exception as e:
         st.error(f"Error parsing input: {e}")
         return
-
+    st.write("Parsed conc (M):", conc)
+    st.write("Parsed tau (s):", tau)
     # --- Fit & plot ---
     c_pred, tau_pred, tau_min_fit, r2 = fit_and_plot_physical(conc, tau, conc_cross, Ka_XL, Kac)
 
