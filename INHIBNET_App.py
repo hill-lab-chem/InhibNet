@@ -99,8 +99,8 @@ def description_page():
     
     ### Network Models
     You can choose between two network models:
-    - **Phantom Network** – accounts for network fluctuations, this works best for dilute polymer networks.
-    - **Affine Network** – assumes a fully connected network with affine deformations, this works best for more concentrated networks.
+    - **Phantom Network** – accounts for network fluctuations, this works best for dilute polymer networks (i.e. close to the overlap concentration).
+    - **Affine Network** – assumes a fully connected network with affine deformations, this works best for more concentrated networks (i.e. greater than ~4x overlap concentration).
     
     ### Instructions
     - Use the sidebar to select a page.
