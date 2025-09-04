@@ -457,7 +457,7 @@ def app3():
 # ==========================================================
 # Main Controller
 # ==========================================================
-page = st.sidebar.radio("Select a Page", ["Description","3D Surface Explorer", "Modulus Prediction", "Keq Prediction"])
+page = st.sidebar.radio("Select a Page", ["Description", "Modulus Prediction", "Keq Prediction","3D Surface Explorer"])
 if page == "Description":
     description_page()
 elif page == "3D Surface Explorer":
