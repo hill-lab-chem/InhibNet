@@ -523,8 +523,7 @@ def app4():
     except Exception as e:
         st.error(f"Error parsing input: {e}")
         return
-    st.write("Parsed conc (M):", conc)
-    st.write("Parsed tau (s):", tau)
+
     # --- Fit & plot ---
     c_pred, tau_pred, tau_min_fit, r2 = fit_and_plot_physical(conc, tau, conc_cross, Ka_XL, Kac)
 
