@@ -19,7 +19,9 @@ def description_page():
 
     Or for information about how the code works feel free to visit our GitHub here: https://github.com/hill-lab-chem/InhibNet/
 
-    The purpose of this work is to quantify how a single polymer network can be altered by adding a small molecule that can compete with a crosslink.
+    The purpose of this work is to quantify how a polymer network's material properties can be altered by adding a small molecule that can compete with a crosslink. It has long been shown in the literature 
+    that the material properties (i.e. modulus and relaxation time) of dynamic polymer networks are determined by the dynamics of the crosslink. We propose that adding a small molecule competitor can 
+    alter the ma
     We hypothesized that principles from competitive inhibition of enzymes could be adapted to dynamic hydrogels to provide a similarly simple framework for predicting how key network
     properties change in the presence of competing species. In particular, we reasoned that the apparent equilibrium ($K_{a,app}$), widely used in enzyme kinetics to capture effective affinities
     under competitive inhibition, could be directly translated to dynamic networks as a predictor of mechanical response. The crosslinks exist in a ternary equilibrium between unbound,
@@ -237,6 +239,49 @@ def predict_affine_modulus(K_val, conc_cross, other_K, init_g, comp_concs, fit_t
     return init_g * normalized_g0
 
 
+# ========================================
+# Tau functions
+# ========================================
+
+def comp_inhib_p(conc_cross, KabMax, KacMin, c):
+    Kab_app = KabMax / (1 + KacMin * c)
+    p = (1 + (1 / (2 * conc_cross * Kab_app))) - np.sqrt((1 + (1 / (2 * conc_cross * Kab_app)))**2 - 1)
+    return p
+
+def compute_ve(c, conc_cross, KabMax, KacMin):
+    p = comp_inhib_p(conc_cross, KabMax, KacMin, c)
+    P_out = np.sqrt(1 / p - 3/4) - 0.5
+    P3 = 4 * P_out * (1 - P_out)**3
+    P4 = (1 - P_out)**4
+    ve = conc_cross * ((3/2) * P3 + 2 * P4)
+    return ve
+
+def tau_model_physical(c, tau_0, tau_min, conc_cross, KabMax, KacMin):
+    ve = compute_ve(c, conc_cross, KabMax, KacMin)
+    ve_0 = compute_ve(np.array([0]), conc_cross, KabMax, KacMin)[0]
+    ve_scaled = ve / ve_0
+    return tau_min + (tau_0 - tau_min) * ve_scaled
+
+# --- Fit & Plot helper ---
+def fit_and_plot_physical(conc, tau, conc_cross, KabMax, KacMin):
+    tau_0_fixed = tau[0]
+
+    def model(c, tau_min):
+        return tau_model_physical(c, tau_0_fixed, tau_min, conc_cross, KabMax, KacMin)
+
+    popt, _ = curve_fit(model, conc, tau, p0=[0.1], bounds=([0.001], [10.0]))
+
+    # Predictions
+    c_pred = np.linspace(0, conc.max(), 300)
+    tau_pred = model(c_pred, *popt)
+
+    # R²
+    residuals = tau - model(conc, *popt)
+    ss_res = np.sum(residuals**2)
+    ss_tot = np.sum((tau - np.mean(tau))**2)
+    r_squared = 1 - (ss_res / ss_tot)
+
+    return c_pred, tau_pred, popt[0], r_squared
 
 
 # ========================================
@@ -354,8 +399,8 @@ def app2():
     model_choice = st.radio("Choose Network Model:", ["Phantom", "Affine"])
     name = st.text_input("Input File Name", value='phantom_pred_modulus_default')
     conc_cross_mM = st.number_input("Crosslink Concentration (mM)", value=80.0)
-    Kab = st.number_input("Crosslink Keq (M^-1)", value=2185.0)
-    Kac = st.number_input("Competitor Keq (M^-1)", value=280.0)
+    Kab = st.number_input("Crosslink Ka (M^-1)", value=2185.0)
+    Kac = st.number_input("Competitor Ka (M^-1)", value=280.0)
 
     unit_options = {"Pa":1, "kPa":1e3, "MPa":1e6, "GPa":1e9}
     unit_choice = st.selectbox("Units for Initial Gel Stiffness", list(unit_options.keys()), index=1)
@@ -453,16 +498,55 @@ def app3():
     except Exception as e:
         st.error(f"Error: {e}")
 
+# ==========================================================
+# App 4: Tau Prediction & Fitting
+# ==========================================================
+def app4():
+    st.title("Relaxation Time (τ) Prediction")
+
+    # --- User Inputs ---
+    st.sidebar.header("Model Parameters")
+    conc_cross = st.sidebar.number_input("Crosslink concentration (mM)", value=80.0) / 1000  # M
+    Ka_XL = st.sidebar.number_input("Ka,XL (Crosslink Ka, M^-1)", value=2185.0)
+    Kac = st.sidebar.number_input("Ka,C (Competitor Ka, M^-1)", value=489.0)
+
+    st.sidebar.subheader("Experimental Data")
+    comp_concs_str = st.text_input("Competitor concs (mM, comma-separated)", "0,10,20,30,40")
+    exp_tau_str = st.text_input("Observed τ values (s, comma-separated)", 
+                                "4.56,3.86,3.47,3.20,2.87")
+
+    # --- Parse data ---
+    try:
+        conc = np.array([float(x) for x in comp_concs_str.split(",")]) / 1000  # mM → M
+        tau = np.array([float(y) for y in exp_tau_str.replace(" ", ",").split(",")])
+    except Exception as e:
+        st.error(f"Error parsing input: {e}")
+        return
+
+    # --- Fit & plot ---
+    c_pred, tau_pred, tau_min_fit, r2 = fit_and_plot_physical(conc, tau, conc_cross, Ka_XL, Kac)
+
+    fig, ax = plt.subplots(figsize=(6, 5))
+    ax.errorbar(conc*1e3, tau, fmt="o", label="Experimental")
+    ax.plot(c_pred*1e3, tau_pred, "-", label=f"Fit (τ_min = {tau_min_fit:.2f} s, R²={r2:.3f})")
+    ax.set_xlabel("Competitor Concentration (mM)")
+    ax.set_ylabel("Relaxation Time τ (s)")
+    ax.legend()
+    st.pyplot(fig)
+
+
 
 # ==========================================================
 # Main Controller
 # ==========================================================
-page = st.sidebar.radio("Select a Page", ["Description", "Modulus Prediction", "Keq Prediction","3D Surface Explorer"])
+page = st.sidebar.radio("Select a Page", ["Description", "Modulus Prediction", "Keq Prediction","Tau Prediction & Fitting","3D Surface Explorer"])
 if page == "Description":
     description_page()
 elif page == "3D Surface Explorer":
     app1()
 elif page == "Modulus Prediction":
     app2()
-else:
+elif: page == "Keq Prediction":
     app3()
+else:
+    app4()
