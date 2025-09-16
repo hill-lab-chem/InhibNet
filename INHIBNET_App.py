@@ -92,13 +92,15 @@ def description_page():
     """)
 
     st.markdown("""
-    **Three main tools are included:**
-    1. **Modulus Surface Visualization** – This represents the design space available in this work. You can input features like assocation of the crosslink($K_{a,XL}$),
+    **Four main tools are included:**
+    1. **Modulus vs Competitor Concentration** – 2D plot to see how modulus changes with a single competitor. Input features of the crosslink, and the competitor, and the initial stiffness of your gel.
+    The output will be a prediction of how modulus will change under a range of competitor concentrations. Feel free to download a CSV of your data.
+    2. **Experimental Modulus and Concentration to predict $K_{a,C}$ or $K_{a,XL}$** – A tool to predict either $K_{a,C}$ or $K_{a,XL}$ from experimental modulus and concentration data. 
+    3. **Relaxation time as a function of competitor** – This predicts how relaxation time changes as a function of competitor. Simply input the uninhibited relaxation time, 
+    and thermodynamic information about the crosslink and competitor and outputs for relaxation time will be plotted.
+    4. **Modulus Surface Visualization** – This represents the design space available in this work. You can input features like assocation of the crosslink($K_{a,XL}$),
     concentration of crosslinks(Na), association of the competitor($K_{a,C}$), concentration of competitor([C]). This plots modulus vs. $K_{a,C}$ vs. [C]. This interactive graph allows
     for you to see what modulus values a range of comeptitor strengths and concentrations will yield.
-    2. **Modulus vs Competitor Concentration** – 2D plot to see how modulus changes with a single competitor. Input features of the crosslink, and the competitor, and the initial stiffness of your gel.
-    The output will be a prediction of how modulus will change under a range of competitor concentrations. Feel free to download a CSV of your data.
-    3. **Experimental Modulus and Concentration to predict $K_{a,C}$ or $K_{a,XL}$** – A tool to predict either $K_{a,C}$ or $K_{a,XL}$ from experimental modulus and concentration data. 
     
     ### Network Models
     You can choose between two network models:
@@ -108,7 +110,7 @@ def description_page():
     ### Instructions
     - Use the sidebar to select a page.
     - Adjust the model parameters in each app.
-    - For App 1, hover over the 3D plot to see modulus values at each point.
+    - For App 4, hover over the 3D plot to see modulus values at each point.
     - Use the model selector to switch between Phantom and Affine calculations.
        
     """)
