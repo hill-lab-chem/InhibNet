@@ -651,7 +651,7 @@ def junction_grid_border_overlay_streamlit(conc_cross, Kab, Kac, comp_conc, imag
 # ==========================================================
 # Main Controller
 # ==========================================================
-page = st.sidebar.radio("Select a Page", ["Description", "Modulus Prediction", "Keq Prediction","Tau Prediction & Fitting","3D Surface Explorer"])
+page = st.sidebar.radio("Select a Page", ["Description", "Modulus Prediction", "Keq Prediction","Tau Prediction & Fitting","3D Surface Explorer","Network Visualization"])
 if page == "Description":
     description_page()
 elif page == "3D Surface Explorer":
