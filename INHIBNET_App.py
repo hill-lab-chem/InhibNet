@@ -548,8 +548,7 @@ def app5():
 
     st.markdown("""
     This tool generates a grid of junction images with probabilities 
-    determined by the crosslinking model. Each junction type is randomly 
-    rotated, and borders are drawn as overlays.
+    determined by the crosslinking model. 
     """)
 
     # --- user inputs ---
@@ -559,14 +558,14 @@ def app5():
     comp_conc = st.number_input("Competitor concentration (mM)", value=10.0)
     rows = st.number_input("Grid rows", value=5, step=1)
     cols = st.number_input("Grid cols", value=5, step=1)
-    border_thickness = st.slider("Border thickness", min_value=1, max_value=30, value=5)
+    
 
     # --- select image set depending on conditions ---
     if comp_conc == 0:
         image_paths = [
             "0arms.png",
             "1arm.png",
-            ["2arms_1.png", "2arms_2.png"],  # variants
+            ["2arms_1.png", "2arms_2.png"], 
             "3arms.png",
             "4arms.png"
         ]
@@ -574,7 +573,7 @@ def app5():
         image_paths = [
             "0arms.png",
             "1arm.png",
-            ["2arms_1.png", "2arms_2.png"],  # variants
+            ["2arms_1.png", "2arms_2.png"], 
             "3arms.png",
             "4arms.png"
         ]
@@ -582,7 +581,7 @@ def app5():
         image_paths = [
             "comp0arms.png",
             "comp1arm.png",
-            ["comp2arms_1.png", "comp2arms_2.png"],  # variants
+            ["comp2arms_1.png", "comp2arms_2.png"], 
             "comp3arms.png",
             "4arms.png"
         ]
@@ -597,7 +596,7 @@ def app5():
 
 
 def junction_grid_border_overlay_streamlit(conc_cross, Kab, Kac, comp_conc, image_paths, 
-                                           grid_size, border_thickness, dpi=300):
+                                           grid_size, border_thickness=10, dpi=300):
 
 
     # --- probability calculations ---
