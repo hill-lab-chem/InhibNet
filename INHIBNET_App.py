@@ -6,6 +6,8 @@ from scipy.optimize import minimize
 import plotly.graph_objects as go
 import pandas as pd
 from sklearn.metrics import r2_score
+from PIL import Image, ImageDraw
+import random
 # ========================================
 # Description / Welcome Page
 # ========================================
@@ -537,6 +539,113 @@ def app4():
     ax.legend()
     st.pyplot(fig)
 
+# ==========================================================
+# App 5: Visualization of Inhibited Network
+# ==========================================================
+
+def app5():
+    st.title("Junction Grid Visualization")
+
+    st.markdown("""
+    This tool generates a grid of junction images with probabilities 
+    determined by the crosslinking model. Each junction type is randomly 
+    rotated, and borders are drawn as overlays.
+    """)
+
+    # --- user inputs ---
+    conc_cross = st.number_input("Crosslink concentration (mM)", value=80.0)
+    Kab = st.number_input("Crosslink Ka (M⁻¹)", value=2185.0)
+    Kac = st.number_input("Competitor Ka (M⁻¹)", value=500.0)
+    comp_conc = st.number_input("Competitor concentration (mM)", value=10.0)
+    rows = st.number_input("Grid rows", value=5, step=1)
+    cols = st.number_input("Grid cols", value=5, step=1)
+    border_thickness = st.slider("Border thickness", min_value=1, max_value=30, value=5)
+
+    # --- select image set depending on conditions ---
+    if comp_conc == 0:
+        image_paths = [
+            "0arms.png",
+            "1arm.png",
+            ["2arms_1.png", "2arms_2.png"],  # variants
+            "3arms.png",
+            "4arms.png"
+        ]
+    elif Kac == 0:
+        image_paths = [
+            "0arms.png",
+            "1arm.png",
+            ["2arms_1.png", "2arms_2.png"],  # variants
+            "3arms.png",
+            "4arms.png"
+        ]
+    else:
+        image_paths = [
+            "comp0arms.png",
+            "comp1arm.png",
+            ["comp2arms_1.png", "comp2arms_2.png"],  # variants
+            "comp3arms.png",
+            "4arms.png"
+        ]
+
+    if st.button("Generate Grid"):
+        fig = junction_grid_border_overlay_streamlit(
+            conc_cross, Kab, Kac, comp_conc, image_paths,
+            grid_size=(rows, cols),
+            border_thickness=border_thickness,
+        )
+        st.pyplot(fig)
+
+
+def junction_grid_border_overlay_streamlit(conc_cross, Kab, Kac, comp_conc, image_paths, 
+                                           grid_size, border_thickness, dpi=300):
+
+
+    # --- probability calculations ---
+    Kab_app = Kab / (1 + Kac * (comp_conc / 1000))
+    p = (1 + 1 / (2 * conc_cross / 1000 * Kab_app)) - np.sqrt(
+        (1 + 1 / (2 * conc_cross / 1000 * Kab_app))**2 - 1
+    )
+    P_out = np.sqrt(1 / p - 0.75) - 0.5
+
+    P0 = P_out**4
+    P1 = 4 * (1 - P_out) * P_out**3
+    P2 = 6 * (1 - P_out)**2 * P_out**2
+    P3 = 4 * P_out * (1 - P_out)**3
+    P4 = (1 - P_out)**4
+    probs = np.array([P0, P1, P2, P3, P4])
+    probs = probs / probs.sum()
+
+    rows, cols = grid_size
+    choices = np.random.choice(len(probs), size=(rows, cols), p=probs)
+
+    fig, ax = plt.subplots(figsize=(cols, rows), dpi=dpi)
+    ax.set_xlim(0, cols)
+    ax.set_ylim(0, rows)
+    ax.axis('off')
+
+    for i in range(rows):
+        for j in range(cols):
+            idx = choices[i, j]
+
+            if isinstance(image_paths[idx], list):
+                img_path = random.choice(image_paths[idx])
+            else:
+                img_path = image_paths[idx]
+
+            img = Image.open(img_path).convert("RGBA")
+            draw = ImageDraw.Draw(img)
+            width, height = img.size
+            draw.rectangle([0, 0, width-3, height-3], outline="black", width=border_thickness)
+
+            angle = random.choice([0, 90, 180, 270])
+            img = img.rotate(angle, expand=False)
+
+            ax.imshow(img, extent=[j, j+1, rows-i-1, rows-i])
+
+    plt.close(fig)
+    return fig
+
+
 
 
 # ==========================================================
@@ -551,5 +660,7 @@ elif page == "Modulus Prediction":
     app2()
 elif page == "Keq Prediction":
     app3()
-else:
+elif page == "Tau Prediction & Fitting"":
     app4()
+else:
+    app5()
