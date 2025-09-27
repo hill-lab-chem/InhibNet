@@ -660,7 +660,7 @@ elif page == "Modulus Prediction":
     app2()
 elif page == "Keq Prediction":
     app3()
-elif page == "Tau Prediction & Fitting"":
+elif page == "Tau Prediction & Fitting":
     app4()
 else:
     app5()
