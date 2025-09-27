@@ -590,7 +590,7 @@ def app5():
         fig = junction_grid_border_overlay_streamlit(
             conc_cross, Kab, Kac, comp_conc, image_paths,
             grid_size=(rows, cols),
-            border_thickness=border_thickness,
+            border_thickness=10,
         )
         st.pyplot(fig)
 
