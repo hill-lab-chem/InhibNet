@@ -614,11 +614,11 @@ def junction_grid_border_overlay_streamlit(conc_cross, Kab, Kac, comp_conc, imag
     probs = np.array([P0, P1, P2, P3, P4])
     probs = probs / probs.sum()
                                                
-    st.markdown("## Elastically Active Strands")                                              
+    st.markdown("### Elastically Active Strands")                                              
     st.write(f"Probability of 4 junctions = {P4:.3f}")
     st.write(f"Probability of 3 junctions = {P3:.3f}") 
 
-    st.markdown("## Elastically Inactive Strands")
+    st.markdown("### Elastically Inactive Strands")
     st.write(f"Probability of 2 junctions = {P2:.3f}")
     st.write(f"Probability of 1 junctions = {P1:.3f}") 
     st.write(f"Probability of 0 junctions = {P0:.3f}")
