@@ -596,7 +596,7 @@ def app5():
 
 
 def junction_grid_border_overlay_streamlit(conc_cross, Kab, Kac, comp_conc, image_paths, 
-                                           grid_size, border_thickness=15, dpi=300):
+                                           grid_size, border_thickness=20, dpi=300):
 
 
     # --- probability calculations ---
@@ -634,7 +634,7 @@ def junction_grid_border_overlay_streamlit(conc_cross, Kab, Kac, comp_conc, imag
             img = Image.open(img_path).convert("RGBA")
             draw = ImageDraw.Draw(img)
             width, height = img.size
-            draw.rectangle([0, 0, width-4, height-4], outline="black", width=border_thickness)
+            draw.rectangle([0, 0, width-3, height-3], outline="black", width=border_thickness)
 
             angle = random.choice([0, 90, 180, 270])
             img = img.rotate(angle, expand=False)
