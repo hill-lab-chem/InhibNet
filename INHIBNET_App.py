@@ -31,7 +31,7 @@ def description_page():
     crosslinked, and the crosslink-competitor complex, so we reason that the association constants for the formation of the crosslink ($K_{a,XL}$) and the association of the competitor with the
     crosslink ($K_{a,C}$) could be inputted to the $K_{a,app}$ assumption.""")
 
-    st.image("TernaryEq.jpg", 
+    st.image("pics/TernaryEq.jpg", 
          
          use_container_width=True)
     st.markdown("**Figure:** Ternary Equilibrium, allowing for the $K_{a,app}$ assumption")
@@ -563,27 +563,27 @@ def app5():
     # --- select image set depending on conditions ---
     if comp_conc == 0:
         image_paths = [
-            "0arms.png",
-            "1arm.png",
-            ["2arms_1.png", "2arms_2.png"], 
-            "3arms.png",
-            "4arms.png"
+            "pics/0arms.png",
+            "pics/1arm.png",
+            ["pics/2arms_1.png", "pics/2arms_2.png"], 
+            "pics/3arms.png",
+            "pics/4arms.png"
         ]
     elif Kac == 0:
         image_paths = [
-            "0arms.png",
-            "1arm.png",
-            ["2arms_1.png", "2arms_2.png"], 
-            "3arms.png",
-            "4arms.png"
+            "pics/0arms.png",
+            "pics/1arm.png",
+            ["pics/2arms_1.png", "pics/2arms_2.png"], 
+            "pics/3arms.png",
+            "pics/4arms.png"
         ]
     else:
         image_paths = [
-            "comp0arms.png",
-            "comp1arm.png",
-            ["comp2arms_1.png", "comp2arms_2.png"], 
-            "comp3arms.png",
-            "4arms.png"
+            "pics/comp0arms.png",
+            "pics/comp1arm.png",
+            ["pics/comp2arms_1.png", "pics/comp2arms_2.png"], 
+            "pics/comp3arms.png",
+            "pics/4arms.png"
         ]
 
     if st.button("Generate Grid"):
