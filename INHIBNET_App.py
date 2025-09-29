@@ -613,6 +613,8 @@ def junction_grid_border_overlay_streamlit(conc_cross, Kab, Kac, comp_conc, imag
     P4 = (1 - P_out)**4
     probs = np.array([P0, P1, P2, P3, P4])
     probs = probs / probs.sum()
+    print("Probability of 4 junctions = ",P4)
+    print("Probability of 3 junctions = ",P3)                                           
 
     rows, cols = grid_size
     choices = np.random.choice(len(probs), size=(rows, cols), p=probs)
@@ -642,6 +644,7 @@ def junction_grid_border_overlay_streamlit(conc_cross, Kab, Kac, comp_conc, imag
             ax.imshow(img, extent=[j, j+1, rows-i-1, rows-i])
 
     plt.close(fig)
+                                               
     return fig
 
 
