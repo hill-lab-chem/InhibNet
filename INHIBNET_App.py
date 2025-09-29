@@ -596,7 +596,7 @@ def app5():
 
 
 def junction_grid_border_overlay_streamlit(conc_cross, Kab, Kac, comp_conc, image_paths, 
-                                           grid_size, border_thickness=20, dpi=300):
+                                           grid_size, border_thickness=20, dpi=600):
 
 
     # --- probability calculations ---
