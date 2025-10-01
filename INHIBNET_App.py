@@ -499,7 +499,7 @@ def app3():
         ax.plot(comp_concs_mM, exp_moduli, 'o', label='Experimental', color='black')
         ax.plot(smooth_concs_mM, smooth_fit, '-', label='Model Fit', color='blue')
         ax.set_xlabel("Competitor Conc (mM)",fontsize=18)
-        ax.set_ylabel("Modulus",fontsize=18))
+        ax.set_ylabel("Modulus",fontsize=18)
         ax.legend()
         st.pyplot(fig)
     except Exception as e:
