@@ -427,7 +427,7 @@ def app2():
     fig_pred = go.Figure()
     fig_pred.update_layout(
         width=600,  # corresponds to figsize=6 inches roughly
-        height=600
+        height=600,
         font=dict(size=18)
         )
     fig_pred.add_trace(go.Scatter(x=comp_concs, y=pred_g0 / unit_options[unit_choice]))
