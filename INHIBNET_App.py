@@ -431,7 +431,7 @@ def app2():
         font=dict(size=25)
         )
     fig_pred.add_trace(go.Scatter(x=comp_concs, y=pred_g0 / unit_options[unit_choice]))
-    fig_pred.update_layout(xaxis_title="Competitor Conc (mM)", yaxis_title=f"Predicted Modulus ({unit_choice})")
+    fig_pred.update_layout(xaxis_title="Competitor Conc (mM)", yaxis_title=f"Predicted Modulus ({unit_choice})",font=dict(size=25))
 
     st.plotly_chart(fig_pred, use_container_width=True)
 
