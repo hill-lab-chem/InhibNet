@@ -428,7 +428,7 @@ def app2():
     fig_pred.update_layout(
         width=600,  # corresponds to figsize=6 inches roughly
         height=600,
-        font=dict(size=18)
+        font=dict(size=25)
         )
     fig_pred.add_trace(go.Scatter(x=comp_concs, y=pred_g0 / unit_options[unit_choice]))
     fig_pred.update_layout(xaxis_title="Competitor Conc (mM)", yaxis_title=f"Predicted Modulus ({unit_choice})")
