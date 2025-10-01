@@ -428,9 +428,11 @@ def app2():
     fig_pred.update_layout(
         width=600,  # corresponds to figsize=6 inches roughly
         height=600
+        font=dict(size=18)
         )
     fig_pred.add_trace(go.Scatter(x=comp_concs, y=pred_g0 / unit_options[unit_choice]))
     fig_pred.update_layout(xaxis_title="Competitor Conc (mM)", yaxis_title=f"Predicted Modulus ({unit_choice})")
+
     st.plotly_chart(fig_pred, use_container_width=True)
 
     df = pd.DataFrame({
@@ -496,8 +498,8 @@ def app3():
         fig, ax = plt.subplots()
         ax.plot(comp_concs_mM, exp_moduli, 'o', label='Experimental', color='black')
         ax.plot(smooth_concs_mM, smooth_fit, '-', label='Model Fit', color='blue')
-        ax.set_xlabel("Competitor Conc (mM)")
-        ax.set_ylabel("Modulus")
+        ax.set_xlabel("Competitor Conc (mM)",fontsize=18)
+        ax.set_ylabel("Modulus",fontsize=18))
         ax.legend()
         st.pyplot(fig)
     except Exception as e:
