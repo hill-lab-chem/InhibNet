@@ -1,4 +1,4 @@
-# InhibNet: Inhibition of Polymer Networks
+# InhibNet: A tool for predicting hydrogel mechanics from competitive inhibition of dynamic crosslinks.
 
 Welcome! This app allows you to explore how competitive inhibition affects the mechanical properties of polymer networks.
 Associated publication: TBD
