@@ -35,17 +35,14 @@ For details about how the code works, visit our GitHub repository:
 
 ---
 
-The purpose of this work is to quantify how a polymer network's material properties can be altered by adding a small molecule that can compete with a crosslink.  
-It has long been shown in the literature that the material properties (i.e., modulus and relaxation time) of dynamic polymer networks are determined by the dynamics of the crosslink.  
+The purpose of this work is to quantify how a polymer network's material properties can be altered by adding a small molecule that can compete with a crosslink. It has long been shown in the literature that the material properties (i.e., modulus and relaxation time) of dynamic polymer networks are determined by the dynamics of the crosslink.  
 
-We propose that adding a small molecule competitor can alter the dynamics of the crosslink through the strength of the competing interaction.  
-In turn, the altered dynamics lead to a predictable change in material properties.  
+We propose that adding a small molecule competitor can alter the dynamics of the crosslink through the strength of the competing interaction. In turn, the altered dynamics lead to a predictable change in material properties.  
 This framework has been validated across boronate ester and hydrazone dynamic crosslinked networks, demonstrating predictive accuracy for both shear modulus and relaxation time.
 
 We hypothesized that principles from enzyme competitive inhibition could be adapted to dynamic hydrogels to provide a similarly simple framework for predicting how key network properties change in the presence of competing species.  
 
-In this analogy, the apparent equilibrium constant ($K_{a,app}$), commonly used in enzyme kinetics to describe effective binding affinities under competition, can be translated to dynamic networks as a predictor of mechanical response.  
-Because the crosslinks exist in a ternary equilibrium among unbound strands, crosslinked pairs, and crosslink–competitor complexes, we reasoned that the association constants for crosslink formation ($K_{a,XL}$) and competitor binding ($K_{a,C}$) could be used within the $K_{a,app}$ framework to capture the effective network behavior.
+In this analogy, the apparent equilibrium constant ($K_{a,app}$), commonly used in enzyme kinetics to describe effective binding affinities under competition, can be translated to dynamic networks as a predictor of mechanical response.  Due to the crosslinks existing in a ternary equilibrium among unbound strands, crosslinked pairs, and crosslink–competitor complexes, we reasoned that the association constants for crosslink formation ($K_{a,XL}$) and competitor binding ($K_{a,C}$) could be used within the $K_{a,app}$ framework to capture the effective network behavior.
 
 **Figure:** Ternary equilibrium, allowing for the $K_{a,app}$ assumption  
 ![Ternary Equilibrium](pics/TernaryEq.jpg)
