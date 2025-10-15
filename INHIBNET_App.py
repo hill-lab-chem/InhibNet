@@ -24,12 +24,13 @@ def description_page():
 
     The purpose of this work is to quantify how a polymer network's material properties can be altered by adding a small molecule that can compete with a crosslink. It has long been shown in the literature 
     that the material properties (i.e. modulus and relaxation time) of dynamic polymer networks are determined by the dynamics of the crosslink. We propose that adding a small molecule competitor can 
-    alter the ma
-    We hypothesized that principles from competitive inhibition of enzymes could be adapted to dynamic hydrogels to provide a similarly simple framework for predicting how key network
-    properties change in the presence of competing species. In particular, we reasoned that the apparent equilibrium ($K_{a,app}$), widely used in enzyme kinetics to capture effective affinities
-    under competitive inhibition, could be directly translated to dynamic networks as a predictor of mechanical response. The crosslinks exist in a ternary equilibrium between unbound,
-    crosslinked, and the crosslink-competitor complex, so we reason that the association constants for the formation of the crosslink ($K_{a,XL}$) and the association of the competitor with the
-    crosslink ($K_{a,C}$) could be inputted to the $K_{a,app}$ assumption.""")
+    alter the dynamics of the crosslink through the strength of the competing interaction. In turn, the altered dynamics leads to a predictible change in material proeprties. This framework has been validated 
+    across boronate ester and hydrazone dynamic crosslinked networks, demonstrating predictive accuracy for both shear modulus and relaxation time.
+    
+    We hypothesized that principles from enzyme competitive inhibition could be adapted to dynamic hydrogels to provide a similarly simple framework for predicting how key network properties change in the presence 
+    of competing species. In this analogy, the apparent equilibrium constant ($K_{a,app}$), commonly used in enzyme kinetics to describe effective binding affinities under competition, can be translated to dynamic 
+    networks as a predictor of mechanical response. Because the crosslinks exist in a ternary equilibrium among unbound strands, crosslinked pairs, and crosslink–competitor complexes, we reasoned that the association 
+    constants for crosslink formation ($K_{a,XL}$) and competitor binding ($K_{a,C}$) could be used within the $K_{a,app}$ framework to capture the effective network behavior.""")
 
     st.image("pics/TernaryEq.jpg", 
          
@@ -74,13 +75,13 @@ def description_page():
     $$
     So modulus is:
     $$
-    \frac{g_0}{K_b T} = v_{e}
+    \frac{G_p}{K_b T} = v_{e}
     $$
     
     **2. Shear modulus (phantom network):**
     The phantom network corrects for concentration of crosslinks as:
     $$
-    \frac{g_0}{K_b T} = v_{e} - \mu_{e}
+    \frac{G_p}{K_b T} = v_{e} - \mu_{e}
     $$
     where:
     $$
@@ -89,12 +90,23 @@ def description_page():
     
     Where the modulus equation can be simpliefied as:
     $$
-    g_0 = \frac{N_a}{16} \left(3 - \sqrt{\frac{4}{p} - 3}\right)^3 \left(\sqrt{\frac{4}{p} - 3} + 1\right)
+    G_p = \frac{N_a}{16} \left(3 - \sqrt{\frac{4}{p} - 3}\right)^3 \left(\sqrt{\frac{4}{p} - 3} + 1\right)
     $$
+    **3. Tau Prediction:**
+    The relaxation time (\( \tau \)) decreases with increasing competitor concentration due to disruption of elastically active crosslinks. We model this using a Langmuir-type decay relation scaled by the fraction of active strands (\( v_e \)):
+    
+    $$
+    \tau(C) = \tau_0 - (\tau_0 - \tau_{min}) \left(\frac{2 v_e}{N_a}\right)
+    $$
+    
+    where:  
+    - \( \tau_0 \) is the relaxation time in the absence of competitor,  
+    - \( \tau_{min} \) is the minimum relaxation time at saturating competitor concentration, and  
+    - \( v_e \) and \( N_a \) are as defined above. 
     """)
 
     st.markdown("""
-    **Four main tools are included:**
+    **Five main tools are included:**
     1. **Modulus vs Competitor Concentration** – 2D plot to see how modulus changes with a single competitor. Input features of the crosslink, and the competitor, and the initial stiffness of your gel.
     The output will be a prediction of how modulus will change under a range of competitor concentrations. Feel free to download a CSV of your data.
     2. **Experimental Modulus and Concentration to predict $K_{a,C}$ or $K_{a,XL}$** – A tool to predict either $K_{a,C}$ or $K_{a,XL}$ from experimental modulus and concentration data. 
@@ -103,6 +115,7 @@ def description_page():
     4. **Modulus Surface Visualization** – This represents the design space available in this work. You can input features like assocation of the crosslink($K_{a,XL}$),
     concentration of crosslinks(Na), association of the competitor($K_{a,C}$), concentration of competitor([C]). This plots modulus vs. $K_{a,C}$ vs. [C]. This interactive graph allows
     for you to see what modulus values a range of comeptitor strengths and concentrations will yield.
+    5. **Network Visualization** - This work is grounded in the mean field assumption. We take the experimental values of a system and then calculate the average units that have elastically active strands. This tool presents a way to create 2d visualizaitons of networks under different parameters, and outputs the probabilities of each state.
     
     ### Network Models
     You can choose between two network models:
