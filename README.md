@@ -115,29 +115,50 @@ where:
 - $\tau_0$ — relaxation time in the absence of competitor  
 - $\tau_{min}$ — minimum $\tau$ value as competitor concentration approaches infinity  
 - $v_e$ and $N_a$ — as defined above
-
 ## Tools Available in App
-    **Five main tools are included:**
-    1. **Modulus vs Competitor Concentration** – 2D plot to see how modulus changes with a single competitor. Input features of the crosslink, and the competitor, and the initial stiffness of your gel.
-    The output will be a prediction of how modulus will change under a range of competitor concentrations. Feel free to download a CSV of your data.
-    2. **Experimental Modulus and Concentration to predict $K_{a,C}$ or $K_{a,XL}$** – A tool to predict either $K_{a,C}$ or $K_{a,XL}$ from experimental modulus and concentration data. 
-    3. **Relaxation time as a function of competitor** – This predicts how relaxation time changes as a function of competitor. Simply input the uninhibited relaxation time, 
-    and thermodynamic information about the crosslink and competitor and outputs for relaxation time will be plotted.
-    4. **Modulus Surface Visualization** – This represents the design space available in this work. You can input features like assocation of the crosslink($K_{a,XL}$),
-    concentration of crosslinks(Na), association of the competitor($K_{a,C}$), concentration of competitor([C]). This plots modulus vs. $K_{a,C}$ vs. [C]. This interactive graph allows
-    for you to see what modulus values a range of comeptitor strengths and concentrations will yield.
-    5. **Network Visualization** - This work is grounded in the mean field assumption. We take the experimental values of a system and then calculate the average units that have elastically active strands. This tool generates a 2d grid of networks under different parameters, and outputs the probabilities of each state.
-    
-    ### Network Models
-    You can choose between two network models:
-    - **Phantom Network** – accounts for network fluctuations, this works best for dilute polymer networks (i.e. close to the overlap concentration).
-    - **Affine Network** – assumes a fully connected network with affine deformations, this works best for more concentrated networks (i.e. greater than ~4x overlap concentration).
-    
-    ### Instructions
-    - Use the sidebar to select a page.
-    - Adjust the model parameters in each app.
-    - For App 4, hover over the 3D plot to see modulus values at each point.
-    - Use the model selector to switch between Phantom and Affine calculations.
+
+**Five main tools are included:**
+
+1. **Modulus vs. Competitor Concentration**  
+   Generate a 2D plot showing how the shear modulus changes with increasing competitor concentration.  
+   Input features of the crosslink, competitor, and the initial stiffness of your gel.  
+   The app outputs predicted modulus values across a range of competitor concentrations and allows you to download a CSV of the results.
+
+2. **Predict $K_{a,C}$ or $K_{a,XL}$ from Experimental Data**  
+   Input experimental modulus and concentration data to estimate either the competitor association constant ($K_{a,C}$) or the crosslink association constant ($K_{a,XL}$).  
+   This is useful for fitting experimental data to the inhibition framework.
+
+3. **Relaxation Time as a Function of Competitor**  
+   Predict how the relaxation time ($\tau$) changes with increasing competitor concentration.  
+   Simply input the uninhibited relaxation time ($\tau_0$) and thermodynamic information about the crosslink and competitor, and the app will generate a predicted relaxation curve.
+
+4. **Modulus Surface Visualization**  
+   Explore the full design space of the model in 3D.  
+   Input features such as the crosslink association constant ($K_{a,XL}$), crosslink concentration ($N_a$), competitor association constant ($K_{a,C}$), and competitor concentration ([C]).  
+   The app generates an interactive 3D plot of modulus vs. $K_{a,C}$ vs. [C], allowing you to visualize how competitor strength and concentration jointly affect the network stiffness.
+
+5. **Network Visualization**  
+   Visualize how elastically active strands vary under different parameters.  
+   This tool simulates a 2D grid of network states based on the mean-field model, calculating the probability of each node being elastically active under given thermodynamic conditions.
+
+---
+
+### Network Models
+
+You can choose between two network elasticity models:
+
+- **Phantom Network** – accounts for network fluctuations and is most appropriate for dilute polymer networks (near the overlap concentration).  
+- **Affine Network** – assumes a fully connected network with affine deformations, best for more concentrated systems (typically >4× the overlap concentration).
+
+---
+
+### Instructions
+
+- Use the **sidebar** to navigate between tools.  
+- Adjust model parameters interactively on each page.  
+- For the **Modulus Surface Visualization** tool, hover over the 3D plot to view modulus values at each coordinate.  
+- Use the **model selector** to toggle between Phantom and Affine network calculations.
+
 
        
 ## Detailed Local Install Instructions
