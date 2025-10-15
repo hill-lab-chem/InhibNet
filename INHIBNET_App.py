@@ -52,24 +52,29 @@ def description_page():
     p = \left(1 + \frac{1}{2 N_a K_{a,app}}\right) - \sqrt{\left(1 + \frac{1}{2 N_a K_{a,app}}\right)^2 - 1}
     $$
 
+    where:  
+    - $p$ is crosslink conversion,  
+    - $N_a$ concentration of crosslink in solution
+
     **2. Shear modulus (affine network):**
    
     First, define the effective probability term:
+    
     $$
     P_{out} = \sqrt{\frac{1}{p} - \frac{3}{4}} - \frac{1}{2}
     $$
     
-    The let us calculate the probability 3 crosslinks will form:
+    The let us calculate the probability 3 crosslinks will form ($$P_{3}):
 
     $$
     P_{3} = 4*P_{out} (1-P_{out})^3
     $$
-    Then the probability 4 crosslinks will form:
+    Then the probability 4 crosslinks will form ($$P_{4}):
 
     $$
     P_{4} = (1-P_{out})^4
     $$
-    So the elastically active strands are:
+    So the elastically active chains ($$v_{e}$$) are:
     $$
     v_{e} = \frac{N_a}{4} (\frac{3}{2}P_3+2P_4 )     
     $$
@@ -80,31 +85,34 @@ def description_page():
     
     **2. Shear modulus (phantom network):**
     
-    The phantom network corrects for concentration of crosslinks as:
+    For more dilute systems (close to the overlap concentration), it is more appropriate to use a phantom model for network elasticity, which accounts for the movement of strand junctions:
     $$
     \frac{G_p}{K_b T} = v_{e} - \mu_{e}
     $$
-    where:
+    
+    where $$\mu_{e}$$ represents the number density of elastically active junctions:
     $$
     \mu_{e} = \frac{N_a}{4} (P_3+P_4 )   
     $$
     
-    Where the modulus equation can be simpliefied as:
+    Where the modulus equation can be simplified as:
+    
     $$
     G_p = \frac{N_a}{16} \left(3 - \sqrt{\frac{4}{p} - 3}\right)^3 \left(\sqrt{\frac{4}{p} - 3} + 1\right)
     $$
+    
     **3. Tau Prediction:**
     
-    The relaxation time (\( \tau \)) decreases with increasing competitor concentration due to disruption of elastically active crosslinks. We model this using a Langmuir-type decay relation scaled by the fraction of active strands (\( v_e \)):
+    The relaxation time ($\tau$) decreases with increasing competitor concentration due to disruption of elastically active crosslinks. We model this using a Langmuir-type decay relation scaled by the fraction of active strands ($v_e$):    
     
     $$
     \tau(C) = \tau_0 - (\tau_0 - \tau_{min}) \left(\frac{2 v_e}{N_a}\right)
     $$
     
     where:  
-    - $$\( \tau_0 \)$$ is the relaxation time in the absence of competitor,  
-    - $$\( \tau_{min} \)$$ is a fitted value that represents the minimum tau value of the gel as competitor concentration goes to infinity, and  
-    - $$\( v_e \)$$ and $$\( N_a \)$$ are as defined above. 
+    - $\tau_0$ is the relaxation time in the absence of competitor,  
+    - $\tau_{min}$ is a fitted value that represents the minimum $\tau$ value of the gel as competitor concentration goes to infinity, and  
+    - $v_e$ and $N_a$ are as defined above.
     """)
 
     st.markdown("""
