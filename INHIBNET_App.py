@@ -79,6 +79,7 @@ def description_page():
     $$
     
     **2. Shear modulus (phantom network):**
+    
     The phantom network corrects for concentration of crosslinks as:
     $$
     \frac{G_p}{K_b T} = v_{e} - \mu_{e}
@@ -93,6 +94,7 @@ def description_page():
     G_p = \frac{N_a}{16} \left(3 - \sqrt{\frac{4}{p} - 3}\right)^3 \left(\sqrt{\frac{4}{p} - 3} + 1\right)
     $$
     **3. Tau Prediction:**
+    
     The relaxation time (\( \tau \)) decreases with increasing competitor concentration due to disruption of elastically active crosslinks. We model this using a Langmuir-type decay relation scaled by the fraction of active strands (\( v_e \)):
     
     $$
