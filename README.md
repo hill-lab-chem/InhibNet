@@ -1,7 +1,9 @@
 # InhibNet: Inhibition of Polymer Networks
 
-Welcome! This app allows you to explore how **competitive inhibition** affects the mechanical properties of polymer networks.
+Welcome! This app allows you to explore how competitive inhibition affects the mechanical properties of polymer networks.
 Associated publication: TBD
+
+For the cloud version of the app please visit: https://inhibnet.streamlit.app/
 
 ## Quick Start
 
