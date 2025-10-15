@@ -14,11 +14,6 @@ For the cloud version of the app please visit: https://inhibnet.streamlit.app/
 
 This app allows you to explore how competitive inhibition affects the mechanical properties of polymer networks.
 
-For more information about this tool, please read our associated publication (link coming soon).
-
-For details about how the code works, visit our GitHub repository:  
-👉 [https://github.com/hill-lab-chem/InhibNet/](https://github.com/hill-lab-chem/InhibNet/)
-
 ---
 
 The purpose of this work is to quantify how a polymer network's material properties can be altered by adding a small molecule that can compete with a crosslink. It has long been shown in the literature that the material properties (i.e., modulus and relaxation time) of dynamic polymer networks are determined by the dynamics of the crosslink.  
