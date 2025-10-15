@@ -102,9 +102,9 @@ def description_page():
     $$
     
     where:  
-    - \( \tau_0 \) is the relaxation time in the absence of competitor,  
-    - \( \tau_{min} \) is the minimum relaxation time at saturating competitor concentration, and  
-    - \( v_e \) and \( N_a \) are as defined above. 
+    - $$\( \tau_0 \)$$ is the relaxation time in the absence of competitor,  
+    - $$\( \tau_{min} \)$$ is a fitted value that represents the minimum tau value of the gel as competitor concentration goes to infinity, and  
+    - $$\( v_e \)$$ and $$\( N_a \)$$ are as defined above. 
     """)
 
     st.markdown("""
