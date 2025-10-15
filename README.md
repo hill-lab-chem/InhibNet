@@ -53,8 +53,9 @@ In this analogy, the apparent equilibrium constant ($K_{a,app}$), commonly used 
 
 ### 1. Crosslink Conversion
 
-```math
+$$
 p = \left(1 + \frac{1}{2 N_a K_{a,app}}\right) - \sqrt{\left(1 + \frac{1}{2 N_a K_{a,app}}\right)^2 - 1}
+$$
 where:
 
 - $p$ — crosslink conversion  
