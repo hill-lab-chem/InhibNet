@@ -1,3 +1,7 @@
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.x-red)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 # InhibNet: A Tool for Predicting Hydrogel Mechanics from Competitive Inhibition of Dynamic Crosslinks.
 
 Welcome! This app allows you to explore how competitive inhibition affects the mechanical properties of polymer networks.
@@ -152,7 +156,7 @@ You can choose between two network elasticity models:
 
 ---
 
-### Instructions
+### Instructions for App Use
 
 - Use the **sidebar** to navigate between tools.  
 - Adjust model parameters interactively on each page.  
