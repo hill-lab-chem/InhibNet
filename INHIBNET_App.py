@@ -16,7 +16,7 @@ def description_page():
     
     st.markdown("""
     ### Welcome!
-    This app allows you to explore how **competitive inhibition** affects mechanical properties of polymer networks.
+    This app allows you to explore how competitive inhibition affects mechanical properties of polymer networks.
 
     For more information about this tool feel free to read our associated publication here: **TBD Please keep your eyes peeled for updates!**
 
