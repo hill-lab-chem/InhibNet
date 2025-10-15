@@ -5,27 +5,7 @@ Associated publication: TBD
 
 For the cloud version of the app please visit: https://inhibnet.streamlit.app/
 
-## Quick Start
 
-If you are super impatient here is the quick start for using this app.
-
-Clone this repo and run the app:
-
-```bash
-git clone https://github.com/hill-lab-chem/InhibNet.git
-cd InhibNet
-
-# Create & activate virtual environment
-python -m venv InhibNetEnv
-source InhibNetEnv/bin/activate       # macOS / Linux
-InhibNetEnv\Scripts\Activate.ps1      # Windows PowerShell
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Launch app
-streamlit run INHIBNET_App.py
-```
 # Background on Work
 
 This app allows you to explore how **competitive inhibition** affects the mechanical properties of polymer networks.
