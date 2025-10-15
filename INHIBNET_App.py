@@ -125,7 +125,7 @@ def description_page():
     4. **Modulus Surface Visualization** – This represents the design space available in this work. You can input features like assocation of the crosslink($K_{a,XL}$),
     concentration of crosslinks(Na), association of the competitor($K_{a,C}$), concentration of competitor([C]). This plots modulus vs. $K_{a,C}$ vs. [C]. This interactive graph allows
     for you to see what modulus values a range of comeptitor strengths and concentrations will yield.
-    5. **Network Visualization** - This work is grounded in the mean field assumption. We take the experimental values of a system and then calculate the average units that have elastically active strands. This tool presents a way to create 2d visualizaitons of networks under different parameters, and outputs the probabilities of each state.
+    5. **Network Visualization** - This work is grounded in the mean field assumption. We take the experimental values of a system and then calculate the average units that have elastically active strands. This tool generates a 2d grid of networks under different parameters, and outputs the probabilities of each state.
     
     ### Network Models
     You can choose between two network models:
