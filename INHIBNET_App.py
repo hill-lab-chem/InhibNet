@@ -54,7 +54,7 @@ def description_page():
 
     where:  
     - $p$ is crosslink conversion,  
-    - $N_a$ concentration of crosslink in solution
+    - $N_a$ concentration of crosslinks in solution
 
     **2. Shear modulus (affine network):**
    
@@ -64,12 +64,12 @@ def description_page():
     P_{out} = \sqrt{\frac{1}{p} - \frac{3}{4}} - \frac{1}{2}
     $$
     
-    The let us calculate the probability 3 crosslinks will form ($$P_{3}):
+    The let us calculate the probability 3 crosslinks will form ($$P_{3}$$):
 
     $$
     P_{3} = 4*P_{out} (1-P_{out})^3
     $$
-    Then the probability 4 crosslinks will form ($$P_{4}):
+    Then the probability 4 crosslinks will form ($$P_{4}$$):
 
     $$
     P_{4} = (1-P_{out})^4
