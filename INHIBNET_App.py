@@ -12,7 +12,7 @@ import random
 # Description / Welcome Page
 # ========================================
 def description_page():
-    st.title("InhibNet (Inhibition of Polymer Networks)")
+    st.title("InhibNet (Competitive **Inhib**ition of Polymer **Net**works with Small Molecules)")
     
     st.markdown("""
     ### Welcome!
