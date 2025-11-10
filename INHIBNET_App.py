@@ -146,13 +146,13 @@ def description_page():
 # ========================================
 # Phantom Network Functions
 # ========================================
-def phantom_network_modulus_surface(conc_cross, Kab, Kac_range, comp_conc_range, g0_init_user): #this is for the 3d plot of the phantom network model. inputs are: concentration of crosslinks, assocation of the crosslink, range of comeptitor assocaition concnstants, range of competitor concentrations, and the intial modulus.
+def phantom_network_modulus_surface(conc_cross, KaXL, Kac_range, comp_conc_range, g0_init_user): #this is for the 3d plot of the phantom network model. inputs are: concentration of crosslinks, assocation of the crosslink, range of comeptitor assocaition concnstants, range of competitor concentrations, and the intial modulus.
     Kac_vals = np.linspace(Kac_range[0], Kac_range[1], 100) #this creates an evenly spaced list of 100 competitor association constant values
     comp_concs = np.linspace(comp_conc_range[0], comp_conc_range[1], 100) #this creates an evenly spaced list of 100 competitor concentration values
     CCOMP, KAC = np.meshgrid(comp_concs, Kac_vals) #this is a little matrix of the possible concentrations with association constants.
 
-    Kab_app = Kab / (1 + KAC * (CCOMP / 1000)) #this calculates the Ka,app assumption from enzyme kinetics.
-    inner = 1 / (2 * conc_cross / 1000 * Kab_app) #this is the inner term of a sqr root for calculating conversion of crosslinks
+    Ka_app = KaXL / (1 + KAC * (CCOMP / 1000)) #this calculates the Ka,app assumption from enzyme kinetics.
+    inner = 1 / (2 * conc_cross / 1000 * Ka_app) #this is the inner term of a sqr root for calculating conversion of crosslinks
     p = (1 + inner) - np.sqrt((1 + inner)**2 - 1) #this calculates conversion of crosslinks
 
     sqrt_term = (4 / p) - 3 #this is a term that will be inside the square root for the shear modulus
@@ -168,12 +168,12 @@ def phantom_network_modulus_surface(conc_cross, Kab, Kac_range, comp_conc_range,
 
     return comp_concs, Kac_vals, real_g0, CCOMP, KAC
 
-def phantom_2d_line(conc_cross, Kab, Kac, comp_conc_range, g0_init_user): #2d version of the 3d one
+def phantom_2d_line(conc_cross, KaXL, Kac, comp_conc_range, g0_init_user): #2d version of the 3d one
     comp_concs = np.linspace(comp_conc_range[0], comp_conc_range[1], 100)
     
 
-    Kab_app = Kab / (1 + Kac * (comp_concs / 1000))
-    inner = 1 / (2 * conc_cross / 1000 * Kab_app)
+    Ka_app = KaXL / (1 + Kac * (comp_concs / 1000))
+    inner = 1 / (2 * conc_cross / 1000 * Ka_app)
     p = (1 + inner) - np.sqrt((1 + inner)**2 - 1)
 
     sqrt_term = (4 / p) - 3
@@ -189,16 +189,16 @@ def phantom_2d_line(conc_cross, Kab, Kac, comp_conc_range, g0_init_user): #2d ve
 
     return comp_concs, normalized_g0, real_g0
 
-def predict_phantom_modulus(K_val, conc_cross, other_K, init_g, comp_concs, fit_target): #for fitting Kac or Kab
+def predict_phantom_modulus(K_val, conc_cross, other_K, init_g, comp_concs, fit_target): #for fitting KaC or KaXL
     if fit_target == "Kac":
         Kac = K_val[0]
-        Kab = other_K
-    else:  # fitting Kab
-        Kac = other_K
-        Kab = K_val[0]
+        KaXL = other_K
+    else:  # fitting KaXL
+        KaC = other_K
+        KaXL = K_val[0]
 
-    Kab_app = Kab / (1 + Kac * comp_concs)
-    p = (1 + (1 / (2 * conc_cross * Kab_app))) - np.sqrt((1 + (1 / (2 * conc_cross * Kab_app)))**2 - 1)
+    Ka_app = KaXL / (1 + Kac * comp_concs)
+    p = (1 + (1 / (2 * conc_cross * Ka_app))) - np.sqrt((1 + (1 / (2 * conc_cross * Ka_app)))**2 - 1)
     g0 = (conc_cross / 16) * (3 - np.sqrt((4 / p) - 3))**3 * (np.sqrt((4 / p) - 3) + 1)
     g0_init = (conc_cross / 16) * (3 - np.sqrt((4 / p[0]) - 3))**3 * (np.sqrt((4 / p[0]) - 3) + 1)
     normalized_g0 = g0 / g0_init
@@ -209,13 +209,13 @@ def predict_phantom_modulus(K_val, conc_cross, other_K, init_g, comp_concs, fit_
 # ========================================
 
 
-def affine_network_modulus_surface(conc_cross, Kab, Kac_range, comp_conc_range, g0_init_user):  #this is for the 3d plot of the affine network model. inputs are: concentration of crosslinks, assocation of the crosslink, range of comeptitor assocaition concnstants, range of competitor concentrations, and the intial modulus.
+def affine_network_modulus_surface(conc_cross, KaXL, Kac_range, comp_conc_range, g0_init_user):  #this is for the 3d plot of the affine network model. inputs are: concentration of crosslinks, assocation of the crosslink, range of comeptitor assocaition concnstants, range of competitor concentrations, and the intial modulus.
     Kac_vals = np.linspace(Kac_range[0], Kac_range[1], 100) #this creates an evenly spaced list of 100 competitor association constant values
     comp_concs = np.linspace(comp_conc_range[0], comp_conc_range[1], 100)#this creates an evenly spaced list of 100 competitor concentration values
     CCOMP, KAC = np.meshgrid(comp_concs, Kac_vals)#this is a little matrix of the possible concentrations with association constants.
 
-    Kab_app = Kab / (1 + KAC * (CCOMP / 1000))#this calculates the Ka,app assumption from enzyme kinetics.
-    p = (1 + 1 / (2 * conc_cross / 1000 * Kab_app)) - np.sqrt((1 + 1 / (2 * conc_cross / 1000 * Kab_app))**2 - 1) #this calculates conversion of crosslinks
+    Ka_app = KaXL / (1 + KAC * (CCOMP / 1000))#this calculates the Ka,app assumption from enzyme kinetics.
+    p = (1 + 1 / (2 * conc_cross / 1000 * Ka_app)) - np.sqrt((1 + 1 / (2 * conc_cross / 1000 * Ka_app))**2 - 1) #this calculates conversion of crosslinks
 
     P_out = np.sqrt(1 / p - 0.75) - 0.5 #for calculating probability of 3 and 4 crosslinks forming
     P3 = 4 * P_out * (1 - P_out)**3 #probability that 3 crosslinks form
@@ -232,10 +232,10 @@ def affine_network_modulus_surface(conc_cross, Kab, Kac_range, comp_conc_range, 
     return comp_concs, Kac_vals, real_g0, CCOMP, KAC #return values
 
 
-def affine_2d_line(conc_cross, Kab, Kac, comp_conc_range, g0_init_user): #2d version of above
+def affine_2d_line(conc_cross, KaXL, Kac, comp_conc_range, g0_init_user): #2d version of above
     comp_concs = np.linspace(comp_conc_range[0], comp_conc_range[1], 100)
-    Kab_app = Kab / (1 + Kac * (comp_concs / 1000))
-    inner = 1 / (2 * conc_cross / 1000 * Kab_app)
+    Ka_app = KaXL / (1 + Kac * (comp_concs / 1000))
+    inner = 1 / (2 * conc_cross / 1000 * Ka_app)
     p = (1 + inner) - np.sqrt((1 + inner)**2 - 1)
     P_out = np.sqrt(1 / p - 0.75) - 0.5
     P3 = 4 * P_out * (1 - P_out)**3
@@ -251,16 +251,16 @@ def affine_2d_line(conc_cross, Kab, Kac, comp_conc_range, g0_init_user): #2d ver
 
     return comp_concs, normalized_g0, real_g0
 
-def predict_affine_modulus(K_val, conc_cross, other_K, init_g, comp_concs, fit_target): #for fitting Kac or Kab
+def predict_affine_modulus(K_val, conc_cross, other_K, init_g, comp_concs, fit_target): #for fitting Kac or KaXL
     if fit_target == "Kac":
         Kac = K_val[0]
-        Kab = other_K
-    else:  # fitting Kab
+        KaXL = other_K
+    else:  # fitting KaXL
         Kac = other_K
-        Kab = K_val[0]
+        KaXL = K_val[0]
 
-    Kab_app = Kab / (1 + Kac * comp_concs)
-    p = (1 + (1 / (2 * conc_cross * Kab_app))) - np.sqrt((1 + (1 / (2 * conc_cross * Kab_app)))**2 - 1)
+    Ka_app = KaXL / (1 + Kac * comp_concs)
+    p = (1 + (1 / (2 * conc_cross * KaXL_app))) - np.sqrt((1 + (1 / (2 * conc_cross * KaXL_app)))**2 - 1)
     P_out = np.sqrt(1 / p - 0.75) - 0.5
     P3 = 4 * P_out * (1 - P_out)**3
     P4 = (1 - P_out)**4
@@ -275,31 +275,31 @@ def predict_affine_modulus(K_val, conc_cross, other_K, init_g, comp_concs, fit_t
 # Tau functions
 # ========================================
 
-def comp_inhib_p(conc_cross, KabMax, KacMin, c):
-    Kab_app = KabMax / (1 + KacMin * c)
-    p = (1 + (1 / (2 * conc_cross * Kab_app))) - np.sqrt((1 + (1 / (2 * conc_cross * Kab_app)))**2 - 1)
+def comp_inhib_p(conc_cross, KaXLMax, KacMin, c):
+    KaXL_app = KaXLMax / (1 + KacMin * c)
+    p = (1 + (1 / (2 * conc_cross * Ka_app))) - np.sqrt((1 + (1 / (2 * conc_cross * Ka_app)))**2 - 1)
     return p
 
-def compute_ve(c, conc_cross, KabMax, KacMin):
-    p = comp_inhib_p(conc_cross, KabMax, KacMin, c)
+def compute_ve(c, conc_cross, KaXLMax, KacMin):
+    p = comp_inhib_p(conc_cross, KaXLMax, KacMin, c)
     P_out = np.sqrt(1 / p - 3/4) - 0.5
     P3 = 4 * P_out * (1 - P_out)**3
     P4 = (1 - P_out)**4
     ve = conc_cross * ((3/2) * P3 + 2 * P4)
     return ve
 
-def tau_model_physical(c, tau_0, tau_min, conc_cross, KabMax, KacMin):
-    ve = compute_ve(c, conc_cross, KabMax, KacMin)
-    ve_0 = compute_ve(np.array([0]), conc_cross, KabMax, KacMin)[0]
+def tau_model_physical(c, tau_0, tau_min, conc_cross, KaXLMax, KacMin):
+    ve = compute_ve(c, conc_cross, KaXLMax, KacMin)
+    ve_0 = compute_ve(np.array([0]), conc_cross, KaXLMax, KacMin)[0]
     ve_scaled = ve / ve_0
     return tau_min + (tau_0 - tau_min) * ve_scaled
 
 # --- Fit & Plot helper ---
-def fit_and_plot_physical(conc, tau, conc_cross, KabMax, KacMin):
+def fit_and_plot_physical(conc, tau, conc_cross, KaXLMax, KacMin):
     tau_0_fixed = tau[0]
 
     def model(c, tau_min):
-        return tau_model_physical(c, tau_0_fixed, tau_min, conc_cross, KabMax, KacMin)
+        return tau_model_physical(c, tau_0_fixed, tau_min, conc_cross, KaXLMax, KacMin)
 
     popt, _ = curve_fit(model, conc, tau, p0=[0.1], bounds=([0.0001], [100.0]))
 
@@ -319,17 +319,17 @@ def fit_and_plot_physical(conc, tau, conc_cross, KabMax, KacMin):
 # ========================================
 # Helper function for choosing model
 # ========================================
-def compute_modulus_surface(conc_cross, Kab, Kac_range, comp_conc_range, g0_init_user, model_choice): #for picking 3d graph
+def compute_modulus_surface(conc_cross, KaXL, Kac_range, comp_conc_range, g0_init_user, model_choice): #for picking 3d graph
     if model_choice == "Phantom":
-        return phantom_network_modulus_surface(conc_cross, Kab, Kac_range, comp_conc_range, g0_init_user)
+        return phantom_network_modulus_surface(conc_cross, KaXL, Kac_range, comp_conc_range, g0_init_user)
     else:
-        return affine_network_modulus_surface(conc_cross, Kab, Kac_range, comp_conc_range, g0_init_user)
+        return affine_network_modulus_surface(conc_cross, KaXL, Kac_range, comp_conc_range, g0_init_user)
     
-def compute_modulus_line(conc_cross, Kab, Kac, comp_conc_range, g0_init_user, model_choice): #for picking 2d graph
+def compute_modulus_line(conc_cross, KaXL, Kac, comp_conc_range, g0_init_user, model_choice): #for picking 2d graph
     if model_choice == "Phantom":
-        return phantom_2d_line(conc_cross, Kab, Kac, comp_conc_range, g0_init_user)
+        return phantom_2d_line(conc_cross, KaXL, Kac, comp_conc_range, g0_init_user)
     else:
-        return affine_2d_line(conc_cross, Kab, Kac, comp_conc_range, g0_init_user)
+        return affine_2d_line(conc_cross, KaXL, Kac, comp_conc_range, g0_init_user)
 
 def loss(K_val, conc_cross, other_K, init_g, comp_concs, exp_moduli, fit_target,model_choice): #for picking fitting model
     if model_choice == "Phantom":
@@ -346,7 +346,7 @@ def app1():
 
     # Sidebar model parameters
     st.sidebar.header("Model Parameters")
-    Kab = st.sidebar.number_input("$K_{a,XL}$ (Keq of crosslink)", min_value=0.0, value=2185.0)
+    KaXL = st.sidebar.number_input("$K_{a,XL}$ (Keq of crosslink)", min_value=0.0, value=2185.0)
     conc_cross = st.sidebar.number_input("Crosslink Concentration (mM)", min_value=0.0, value=80.0)
     g0_init_user = st.sidebar.number_input("Initial Modulus (kPa)", min_value=0.0, value=20.0)
     model_choice = st.radio("Choose Network Model:", ["Phantom", "Affine"])
@@ -364,7 +364,7 @@ def app1():
 
     # Compute surface
     comp_concs, kac_vals, modulus, CCOMP, KAC = compute_modulus_surface(
-        conc_cross, Kab, (kac_min, kac_max), (comp_min, comp_max), g0_init_user, model_choice
+        conc_cross, KaXL, (kac_min, kac_max), (comp_min, comp_max), g0_init_user, model_choice
     )
 
     # Apply highlighting logic
@@ -413,7 +413,7 @@ def app1():
     fig.update_layout(
         scene=dict(
             xaxis_title='Competitor Conc (mM)',
-            yaxis_title='Competitor Keq (Ka,C)',
+            yaxis_title='Competitor Ka (Ka,C)',
             zaxis_title='Predicted Modulus (kPa)',
             camera=dict(eye=dict(x=2, y=2, z=1.5))
         ),
@@ -431,7 +431,7 @@ def app2():
     model_choice = st.radio("Choose Network Model:", ["Phantom", "Affine"])
     name = st.text_input("Input File Name", value='phantom_pred_modulus_default')
     conc_cross_mM = st.number_input("Crosslink Concentration (mM)", value=80.0)
-    Kab = st.number_input("Crosslink Ka (M^-1)", value=2185.0)
+    KaXL = st.number_input("Crosslink Ka (M^-1)", value=2185.0)
     Kac = st.number_input("Competitor Ka (M^-1)", value=280.0)
 
     unit_options = {"Pa":1, "kPa":1e3, "MPa":1e6, "GPa":1e9}
@@ -444,7 +444,7 @@ def app2():
 
     crange_mM = np.linspace(cmin_mM, cmax_mM, 100)*100
 
-    comp_concs, normalized_g0, pred_g0 = compute_modulus_line(conc_cross_mM, Kab, Kac, crange_mM, init_g, model_choice)
+    comp_concs, normalized_g0, pred_g0 = compute_modulus_line(conc_cross_mM, KaXL, Kac, crange_mM, init_g, model_choice)
 
 ##    fig_norm = go.Figure()
 ##    fig_norm.add_trace(go.Scatter(x=comp_concs, y=normalized_g0, mode='lines'))
@@ -480,22 +480,22 @@ def app2():
 
 
 # ==========================================================
-# App 3: Estimate Keq from Modulus
+# App 3: Estimate Ka from Modulus
 # ==========================================================
 def app3():
-    st.title("Estimate Keq from Modulus")
+    st.title("Estimate Ka from Modulus")
     model_choice = st.radio("Choose Network Model:", ["Phantom", "Affine"])
 
-    fit_target = st.radio("Which parameter to estimate?", ["Kac", "Kab"])
+    fit_target = st.radio("Which parameter to estimate?", ["KaC", "KaXL"])
     init_g = st.number_input("Initial modulus (G₀)", value=21.85)
     conc_cross_mM = st.number_input("Crosslink concentration (mM)", value=80.0)
 
-    if fit_target == "Kac":
-        fixed_Kab = st.number_input("Kab (Crosslink Keq, M^-1)", value=2185.0)
-        guess, fixed_param = 1000, fixed_Kab
+    if fit_target == "KaC":
+        fixed_KaXL = st.number_input("KaXL (Crosslink Ka, M^-1)", value=2185.0)
+        guess, fixed_param = 1000, fixed_KaXL
     else:
-        fixed_Kac = st.number_input("Kac (Competitor Keq, M^-1)", value=450.0)
-        guess, fixed_param = 2185, fixed_Kac
+        fixed_Kac = st.number_input("KaC (Competitor Ka, M^-1)", value=450.0)
+        guess, fixed_param = 2185, fixed_KaC
 
     comp_concs_str = st.text_input("Competitor concs (mM, comma-separated)", "0,10,20,30,40")
     exp_moduli_str = st.text_input("Observed moduli", "21.85,17.05,14.98,12.54,11.60")
@@ -591,7 +591,7 @@ def app5():
 
     # --- user inputs ---
     conc_cross = st.number_input("Crosslink concentration (mM)", value=80.0)
-    Kab = st.number_input("Crosslink Ka (M⁻¹)", value=2185.0)
+    KaXL = st.number_input("Crosslink Ka (M⁻¹)", value=2185.0)
     Kac = st.number_input("Competitor Ka (M⁻¹)", value=500.0)
     comp_conc = st.number_input("Competitor concentration (mM)", value=10.0)
     rows = st.number_input("Grid rows", value=5, step=1)
@@ -626,21 +626,21 @@ def app5():
 
     if st.button("Generate Grid"):
         fig = junction_grid_border_overlay_streamlit(
-            conc_cross, Kab, Kac, comp_conc, image_paths,
+            conc_cross, KaXL, Kac, comp_conc, image_paths,
             grid_size=(rows, cols),
             border_thickness=10,
         )
         st.pyplot(fig)
 
 
-def junction_grid_border_overlay_streamlit(conc_cross, Kab, Kac, comp_conc, image_paths, 
+def junction_grid_border_overlay_streamlit(conc_cross, KaXL, Kac, comp_conc, image_paths, 
                                            grid_size, border_thickness=20, dpi=600):
 
 
     # --- probability calculations ---
-    Kab_app = Kab / (1 + Kac * (comp_conc / 1000))
-    p = (1 + 1 / (2 * conc_cross / 1000 * Kab_app)) - np.sqrt(
-        (1 + 1 / (2 * conc_cross / 1000 * Kab_app))**2 - 1
+    Ka_app = KaXL / (1 + Kac * (comp_conc / 1000))
+    p = (1 + 1 / (2 * conc_cross / 1000 * Ka_app)) - np.sqrt(
+        (1 + 1 / (2 * conc_cross / 1000 * Ka_app))**2 - 1
     )
     P_out = np.sqrt(1 / p - 0.75) - 0.5
 
