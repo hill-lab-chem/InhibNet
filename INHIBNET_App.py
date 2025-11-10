@@ -189,12 +189,12 @@ def phantom_2d_line(conc_cross, KaXL, Kac, comp_conc_range, g0_init_user): #2d v
 
     return comp_concs, normalized_g0, real_g0
 
-def predict_phantom_modulus(K_val, conc_cross, other_K, init_g, comp_concs, fit_target): #for fitting KaC or KaXL
+def predict_phantom_modulus(K_val, conc_cross, other_K, init_g, comp_concs, fit_target): #for fitting Kac or KaXL
     if fit_target == "Kac":
         Kac = K_val[0]
         KaXL = other_K
     else:  # fitting KaXL
-        KaC = other_K
+        Kac = other_K
         KaXL = K_val[0]
 
     Ka_app = KaXL / (1 + Kac * comp_concs)
@@ -379,7 +379,7 @@ def app1():
         highlight_name = f'Modulus ≈ {target_modulus}±{tolerance}'
         highlight_color = "red"
 
-    else:  # Highlight by KaC
+    else:  # Highlight by Kac
         target_kac = st.sidebar.number_input("Target $K_{a,C}$", min_value=0.0, value=1000.0)
         tolerance = st.sidebar.number_input("Tolerance (±)", min_value=0.01, max_value=500.0, value=50.0)
 
@@ -486,16 +486,16 @@ def app3():
     st.title("Estimate Ka from Modulus")
     model_choice = st.radio("Choose Network Model:", ["Phantom", "Affine"])
 
-    fit_target = st.radio("Which parameter to estimate?", ["KaC", "KaXL"])
+    fit_target = st.radio("Which parameter to estimate?", ["Kac", "KaXL"])
     init_g = st.number_input("Initial modulus (G₀)", value=21.85)
     conc_cross_mM = st.number_input("Crosslink concentration (mM)", value=80.0)
 
-    if fit_target == "KaC":
+    if fit_target == "Kac":
         fixed_KaXL = st.number_input("KaXL (Crosslink Ka, M^-1)", value=2185.0)
         guess, fixed_param = 1000, fixed_KaXL
     else:
-        fixed_Kac = st.number_input("KaC (Competitor Ka, M^-1)", value=450.0)
-        guess, fixed_param = 2185, fixed_KaC
+        fixed_Kac = st.number_input("Kac (Competitor Ka, M^-1)", value=450.0)
+        guess, fixed_param = 2185, fixed_Kac
 
     comp_concs_str = st.text_input("Competitor concs (mM, comma-separated)", "0,10,20,30,40")
     exp_moduli_str = st.text_input("Observed moduli", "21.85,17.05,14.98,12.54,11.60")
