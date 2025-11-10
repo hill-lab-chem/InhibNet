@@ -260,7 +260,7 @@ def predict_affine_modulus(K_val, conc_cross, other_K, init_g, comp_concs, fit_t
         KaXL = K_val[0]
 
     Ka_app = KaXL / (1 + Kac * comp_concs)
-    p = (1 + (1 / (2 * conc_cross * KaXL_app))) - np.sqrt((1 + (1 / (2 * conc_cross * KaXL_app)))**2 - 1)
+    p = (1 + (1 / (2 * conc_cross * Ka_app))) - np.sqrt((1 + (1 / (2 * conc_cross * Ka_app)))**2 - 1)
     P_out = np.sqrt(1 / p - 0.75) - 0.5
     P3 = 4 * P_out * (1 - P_out)**3
     P4 = (1 - P_out)**4
@@ -276,7 +276,7 @@ def predict_affine_modulus(K_val, conc_cross, other_K, init_g, comp_concs, fit_t
 # ========================================
 
 def comp_inhib_p(conc_cross, KaXLMax, KacMin, c):
-    KaXL_app = KaXLMax / (1 + KacMin * c)
+    Ka_app = KaXLMax / (1 + KacMin * c)
     p = (1 + (1 / (2 * conc_cross * Ka_app))) - np.sqrt((1 + (1 / (2 * conc_cross * Ka_app)))**2 - 1)
     return p
 
