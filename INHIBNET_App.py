@@ -346,7 +346,7 @@ def app1():
 
     # Sidebar model parameters
     st.sidebar.header("Model Parameters")
-    KaXL = st.sidebar.number_input("$K_{a,XL}$ (Keq of crosslink)", min_value=0.0, value=2185.0)
+    KaXL = st.sidebar.number_input("$K_{a,XL}$ (Ka of crosslink)", min_value=0.0, value=2185.0)
     conc_cross = st.sidebar.number_input("Crosslink Concentration (mM)", min_value=0.0, value=80.0)
     g0_init_user = st.sidebar.number_input("Initial Modulus (kPa)", min_value=0.0, value=20.0)
     model_choice = st.radio("Choose Network Model:", ["Phantom", "Affine"])
@@ -698,14 +698,14 @@ def junction_grid_border_overlay_streamlit(conc_cross, KaXL, Kac, comp_conc, ima
 # ==========================================================
 # Main Controller
 # ==========================================================
-page = st.sidebar.radio("Select a Page", ["Description", "Modulus Prediction", "Keq Prediction","Tau Prediction & Fitting","3D Surface Explorer","Network Visualization"])
+page = st.sidebar.radio("Select a Page", ["Description", "Modulus Prediction", "Ka Prediction","Tau Prediction & Fitting","3D Surface Explorer","Network Visualization"])
 if page == "Description":
     description_page()
 elif page == "3D Surface Explorer":
     app1()
 elif page == "Modulus Prediction":
     app2()
-elif page == "Keq Prediction":
+elif page == "Ka Prediction":
     app3()
 elif page == "Tau Prediction & Fitting":
     app4()
