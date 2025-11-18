@@ -6,6 +6,7 @@
 
 Welcome! This app allows you to explore how competitive inhibition affects the mechanical properties of polymer networks.
 Associated publication: TBD
+Preprint: https://doi.org/10.26434/chemrxiv-2025-97wbj
 
 For the cloud version of the app please visit: https://inhibnet.streamlit.app/
 
