@@ -23,6 +23,7 @@ def description_page():
     This app allows you to explore how competitive inhibition affects mechanical properties of polymer networks.
 
     For more information about this tool feel free to read our associated publication here: **TBD Please keep your eyes peeled for updates!**
+    Preprint: https://doi.org/10.26434/chemrxiv-2025-97wbj
 
     Or for information about how the code works feel free to visit our GitHub here: https://github.com/hill-lab-chem/InhibNet/
 
