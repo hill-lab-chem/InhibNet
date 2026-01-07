@@ -54,12 +54,12 @@ def description_page():
     **1. Crosslink conversion:**
 
     $$
-    p = \left(1 + \frac{1}{2 N_a K_{a,app}}\right) - \sqrt{\left(1 + \frac{1}{2 N_a K_{a,app}}\right)^2 - 1}
+    p = \left(1 + \frac{1}{2 N_XL K_{a,app}}\right) - \sqrt{\left(1 + \frac{1}{2 N_XL K_{a,app}}\right)^2 - 1}
     $$
 
     where:  
     - $p$ is crosslink conversion,  
-    - $N_a$ concentration of crosslinks in solution
+    - $N_XL$ concentration of crosslinks in solution
 
     **2. Shear modulus (affine network):**
    
@@ -81,7 +81,7 @@ def description_page():
     $$
     So the elastically active chains ($$v_{e}$$) are:
     $$
-    v_{e} = \frac{N_a}{4} (\frac{3}{2}P_3+2P_4 )     
+    v_{e} = \frac{N_XL}{4} (\frac{3}{2}P_3+2P_4 )     
     $$
     So modulus is:
     $$
@@ -97,13 +97,13 @@ def description_page():
     
     where $$\mu_{e}$$ represents the number density of elastically active junctions:
     $$
-    \mu_{e} = \frac{N_a}{4} (P_3+P_4 )   
+    \mu_{e} = \frac{N_XL}{4} (P_3+P_4 )   
     $$
     
     Where the modulus equation can be simplified as:
     
     $$
-    G_p = \frac{N_a}{16} \left(3 - \sqrt{\frac{4}{p} - 3}\right)^3 \left(\sqrt{\frac{4}{p} - 3} + 1\right)
+    G_p = \frac{N_XL}{16} \left(3 - \sqrt{\frac{4}{p} - 3}\right)^3 \left(\sqrt{\frac{4}{p} - 3} + 1\right)
     $$
     
     **3. Tau Prediction:**
@@ -111,13 +111,13 @@ def description_page():
     The relaxation time ($\tau$) decreases with increasing competitor concentration due to disruption of elastically active crosslinks. We model this using a Langmuir-type decay relation scaled by the fraction of active strands ($v_e$):    
     
     $$
-    \tau(C) = \tau_0 - (\tau_0 - \tau_{min}) \left(\frac{2 v_e}{N_a}\right)
+    \tau(C) = \tau_0 - (\tau_0 - \tau_{min}) \left(\frac{2 v_e}{N_XL}\right)
     $$
     
     where:  
     - $\tau_0$ is the relaxation time in the absence of competitor,  
     - $\tau_{min}$ is a fitted value that represents the minimum $\tau$ value of the gel as competitor concentration goes to infinity, and  
-    - $v_e$ and $N_a$ are as defined above.
+    - $v_e$ and $N_XL$ are as defined above.
     """)
 
     st.markdown("""
