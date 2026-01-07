@@ -36,13 +36,13 @@ In this analogy, the apparent equilibrium constant ($K_{a,app}$), commonly used 
 ### 1. Crosslink Conversion
 
 $$
-p = \left(1 + \frac{1}{2 N_XL K_{a,app}}\right) - \sqrt{\left(1 + \frac{1}{2 N_XL K_{a,app}}\right)^2 - 1}
+p = \left(1 + \frac{1}{2 N_{XL} K_{a,app}}\right) - \sqrt{\left(1 + \frac{1}{2 N_{XL} K_{a,app}}\right)^2 - 1}
 $$
 
 where:
 
 - $p$ — crosslink conversion  
-- $N_XL$ — concentration of crosslinks in solution  
+- $N_{XL}$ — concentration of crosslinks in solution  
 
 ---
 
@@ -69,7 +69,7 @@ $$
 The elastically active chains ($v_e$) are:
 
 $$
-v_e = \frac{N_XL}{4} \left(\frac{3}{2}P_3 + 2P_4 \right)
+v_e = \frac{N_{XL}}{4} \left(\frac{3}{2}P_3 + 2P_4 \right)
 $$
 
 The modulus is given by:
@@ -91,13 +91,13 @@ $$
 where $\mu_e$ represents the number density of elastically active junctions:
 
 $$
-\mu_e = \frac{N_XL}{4} (P_3 + P_4)
+\mu_e = \frac{N_{XL}}{4} (P_3 + P_4)
 $$
 
 Simplified modulus equation:
 
 $$
-G_p = \frac{N_XL}{16} \left(3 - \sqrt{\frac{4}{p} - 3}\right)^3 \left(\sqrt{\frac{4}{p} - 3} + 1\right)
+G_p = \frac{N_{XL}}{16} \left(3 - \sqrt{\frac{4}{p} - 3}\right)^3 \left(\sqrt{\frac{4}{p} - 3} + 1\right)
 $$
 
 ---
@@ -108,13 +108,13 @@ The relaxation time ($\tau$) decreases with increasing competitor concentration 
 We model this using a Langmuir-type decay relation scaled by the fraction of active strands ($v_e$):
 
 $$
-\tau(C) = \tau_0 - (\tau_0 - \tau_{min}) \left(\frac{2 v_e}{N_XL}\right)
+\tau(C) = \tau_0 - (\tau_0 - \tau_{min}) \left(\frac{2 v_e}{N_{XL}}\right)
 $$
 
 where:  
 - $\tau_0$ — relaxation time in the absence of competitor  
 - $\tau_{min}$ — minimum $\tau$ value as competitor concentration approaches infinity  
-- $v_e$ and $N_XL$ — as defined above
+- $v_e$ and $N_{XL}$ — as defined above
 ## Tools Available in App
 
 **Five main tools are included:**
