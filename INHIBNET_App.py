@@ -54,7 +54,7 @@ def description_page():
     **1. Crosslink conversion:**
 
     $$
-    p = \left(1 + \frac{1}{2 N_XL K_{a,app}}\right) - \sqrt{\left(1 + \frac{1}{2 N_XL K_{a,app}}\right)^2 - 1}
+    p = \left(1 + \frac{1}{2 N_{XL} K_{a,app}}\right) - \sqrt{\left(1 + \frac{1}{2 N_{XL} K_{a,app}}\right)^2 - 1}
     $$
 
     where:  
