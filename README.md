@@ -5,8 +5,8 @@
 # InhibNet: A Tool for Predicting Hydrogel Mechanics from Competitive Inhibition of Dynamic Crosslinks.
 
 Welcome! This app allows you to explore how competitive inhibition affects the mechanical properties of polymer networks.
-Associated publication: TBD
-Preprint: https://doi.org/10.26434/chemrxiv-2025-97wbj
+Associated publication: ACS Cent. Sci. 2026, 12, 2, 233–242
+https://doi.org/10.1021/acscentsci.5c02130
 
 For the cloud version of the app please visit: https://inhibnet.streamlit.app/
 
