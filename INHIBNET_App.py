@@ -587,7 +587,7 @@ def app4():
     csv_buffer = io.StringIO()
     df_download.to_csv(csv_buffer, index=False)
     st.download_button(
-        label="⬇️ Download CSV",
+        label="Download CSV",
         data=csv_buffer.getvalue(),
         file_name="tau_prediction.csv",
         mime="text/csv"
