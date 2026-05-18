@@ -576,6 +576,22 @@ def app4():
     ax.set_ylabel("Relaxation Time τ (s)")
     ax.legend()
     st.pyplot(fig)
+    # --- Download CSV ---
+    import pandas as pd
+    import io
+
+    df_download = pd.DataFrame({
+        "c_pred_mM": c_pred * 1e3,
+        "tau_pred_s": tau_pred
+    })
+    csv_buffer = io.StringIO()
+    df_download.to_csv(csv_buffer, index=False)
+    st.download_button(
+        label="⬇️ Download CSV",
+        data=csv_buffer.getvalue(),
+        file_name="tau_prediction.csv",
+        mime="text/csv"
+    )
 
 # ==========================================================
 # App 5: Visualization of Inhibited Network
